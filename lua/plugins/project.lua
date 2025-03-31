@@ -3,7 +3,7 @@ return {
 	config = function()
 		local proj = require("project_nvim")
 		proj.setup({
-			detection_methods = { "pttern" },
+			detection_methods = { "pattern" },
 
 			-- All the patterns used to detect root dir, when **"pattern"** is in
 			-- detection_methods
