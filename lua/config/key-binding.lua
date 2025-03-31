@@ -1,6 +1,6 @@
 local M = {}
 local dap = require("dap")
-local diag_jump = require("diag-jump")
+local utils = require("utils")
 local which_key = require("which-key")
 local telescope = require("telescope.builtin")
 
@@ -14,7 +14,7 @@ local ICONS = {
 	good = { icon = "", color = "green" },
 	next = { icon = "", color = "cyan" },
 	prev = { icon = "", color = "cyan" },
-	error = { icon = "", color = "red" },
+	diag = { icon = "", color = "red" },
 	lsp = { icon = "", color = "azure" },
 	motion = { icon = "󱖳", color = "green" },
 	python = { icon = "", color = "purple" },
@@ -43,20 +43,20 @@ function M.setup()
 		{ "<leader>ca", "zg", desc = "add word to dict", icon = ICONS.good },
 		{ "<leader>cs", telescope.spell_suggest, desc = "show suggestion" },
 		{ "<leader>cr", "<cmd>spellr<cr>", desc = "correct all" },
-		{ "<leader>d", group = "Debug" }, -- Debug
-		{ "<leader>db", dap.toggle_breakpoint, desc = "toggle breakpoint" },
-		{ "<leader>dc", dap.continue, desc = "continue" },
-		{ "<leader>e", group = "Errors", icon = ICONS.error }, -- diagnostics Errors
+		{ "<leader>D", group = "Debug" }, -- Debug
+		{ "<leader>Db", dap.toggle_breakpoint, desc = "toggle breakpoint" },
+		{ "<leader>Dc", dap.continue, desc = "continue" },
+		{ "<leader>d", group = "Diagnostic", icon = ICONS.diag }, -- diagnostics Errors
 		{
-			"<leader>eb",
+			"<leader>dd",
 			function()
 				telescope.diagnostics({ bufnr = 0 })
 			end,
-			desc = "error list in buffer",
+			desc = "diagnostics in buffer",
 		},
-		{ "<leader>ew", telescope.diagnostics, desc = "error list in workspace" },
-		{ "<leader>ep", diag_jump.go_prev_diag, desc = "previous diagnostic" },
-		{ "<leader>en", diag_jump.go_next_diag, desc = "next diagnostics" },
+		{ "<leader>dw", telescope.diagnostics, desc = "diagnostics list in workspace" },
+		{ "<leader>dp", utils.go_prev_diag, desc = "previous diagnostic" },
+		{ "<leader>dn", utils.go_next_diag, desc = "next diagnostics" },
 		{ "<leader>f", group = "Files" }, -- Files
 		{ "<leader>fs", "<cmd>w<cr>", desc = "save file", icon = ICONS.save },
 		{ "<leader>fr", telescope.oldfiles, desc = "recent files" },
@@ -82,8 +82,8 @@ function M.setup()
 		{ "<leader>mm", "<Plug>(leap)", desc = "move in this window" },
 		{ "<leader>mb", "<Plug>(leap-backward)", desc = "move backward" },
 		{ "<leader>mf", "<Plug>(leap-forward)", desc = "move forward" },
-		{ "<leader>mep", diag_jump.go_prev_diag, desc = "previous diagnostic" },
-		{ "<leader>men", diag_jump.go_next_diag, desc = "next diagnostic" },
+		{ "<leader>mep", utils.go_prev_diag, desc = "previous diagnostic" },
+		{ "<leader>men", utils.go_next_diag, desc = "next diagnostic" },
 		{ "<leader>w", group = "Windows" }, -- Windows
 		{ "<leader>wc", "<c-w>c", desc = "close window" },
 		{ "<leader>ws", "<c-w>s", desc = "split window" },
@@ -92,6 +92,7 @@ function M.setup()
 		{ "<leader>wk", "<c-w>k", desc = "to upper window" },
 		{ "<leader>wh", "<c-w>h", desc = "to left window" },
 		{ "<leader>wl", "<c-w>l", desc = "to right window" },
+		{ "<leader>wt", "<c-w>l", desc = "to right window" },
 		{ "<leader>p", group = "Python", icon = ICONS.python }, -- Python
 		{ "<leader>pr", "<cmd>!python %<cr>", desc = "run file", icon = ICONS.run },
 		{ "<leader>pd", "<cmd>term python -m pdb %<cr>", desc = "debug file (pdb)", icon = ICONS.debug },

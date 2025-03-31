@@ -1,16 +1,18 @@
+# NeoVim Configure
+
 ## Requirement
 
-A Nerd font is necessary.
+### A Nerd font is necessary.
 
 ### LSP
 The following langauge servers are configured:
-lua_ls for lua
+lua_ls for lua (installed by mason)
 clangd for cpp
 pylsp for python
 
 ### Format and lint
 The following code formatter or linter are configured:
-stylua for lua formatting
+stylua for lua formatting (installed by mason)
 isort for python formatting
 black for python formatting
 pylint for python linting

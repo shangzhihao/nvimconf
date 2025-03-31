@@ -78,4 +78,21 @@ M.go_prev_diag = function()
 	end
 end
 
+M.check_command = function (command)
+    -- Use the `system` function to execute shell commands
+    local handle, err = io.popen("which " .. command)
+    if not handle then
+        return false
+    end
+
+    local clangd_path = handle:read("*a") -- Read the entire output as a string
+    handle:close()                     -- Close the pipe
+    -- Check if the command was found
+    if clangd_path ~= "" then
+        return true
+    else
+        return false
+    end
+end
+
 return M

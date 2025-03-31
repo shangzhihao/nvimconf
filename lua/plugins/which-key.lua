@@ -7,7 +7,7 @@ return {
     config = function()
         local which_key = require("which-key")
         which_key.setup({
-            delay = 1000,
+            delay = 800,
             win = {
                 padding = { 1, 1, 1, 1 },
                 border = "single",
