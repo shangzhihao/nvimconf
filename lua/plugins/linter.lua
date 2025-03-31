@@ -3,7 +3,8 @@ return {
 	config = function()
 		local lint = require("lint")
 		require("lint").linters_by_ft = {
-			python = { "ruff", "mypy" },
+			python = { "ruff" },
+			-- python = { "ruff", "mypy" },
 			-- python = { "pylint", "mypy" },
 			rust = { "clippy" },
 			java = { "checkstyle" },

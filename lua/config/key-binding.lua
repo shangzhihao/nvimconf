@@ -28,11 +28,11 @@ function M.setup()
 		{ "<leader>fm", oil.toggle_float, desc = "file manager" },
 		{ "<leader>fh", oil.toggle_hidden, desc = "toggle hidden" },
 		{ "<leader>fp", key_funs.setting_dir, desc = "file manager" },
-		{ "<leader>g", group = "debuG", icon = ICONS.debug }, -- Debug
-		{ "<leader>gb", dap.toggle_breakpoint, desc = "toggle breakpoint", icon = ICONS.breakpoint },
-		{ "<leader>gc", dap.continue, desc = "continue", icon = ICONS.run },
-		{ "<leader>gr", key_funs.run_file, desc = "run file", icon = ICONS.run },
-		{ "<leader>gd", key_funs.debug_file, desc = "debug (no ui)", icon = ICONS.debug },
+		{ "<leader>D", group = "Debug", icon = ICONS.debug }, -- Debug
+		{ "<leader>Db", dap.toggle_breakpoint, desc = "toggle breakpoint", icon = ICONS.breakpoint },
+		{ "<leader>Dc", dap.continue, desc = "continue", icon = ICONS.run },
+		{ "<leader>Dr", key_funs.run_file, desc = "run file", icon = ICONS.run },
+		{ "<leader>Dd", key_funs.debug_file, desc = "debug (no ui)", icon = ICONS.debug },
 		{ "<leader>l", group = "LSP", icon = ICONS.lsp }, -- LSP
 		{ "<leader>la", vim.lsp.buf.code_action, desc = "code action" },
 		{ "<leader>ld", vim.lsp.buf.definition, desc = "go to definition", icon = ICONS.motion },
