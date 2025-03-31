@@ -5,6 +5,13 @@ local if_nil = vim.F.if_nil
 local fnamemodify = vim.fn.fnamemodify
 local filereadable = vim.fn.filereadable
 
+local function get_tip()
+	math.randomseed(os.time())
+	local tip_index = math.random(1, #tips)
+	return tips[tip_index]
+end
+local tip = get_tip()
+
 local default_header = {
 	type = "text",
 	val = {
@@ -20,6 +27,16 @@ local default_header = {
 		shrink_margin = false,
 		position = "center",
 		-- wrap = "overflow";
+	},
+}
+
+local tip_sec = {
+	type = "text",
+	val = { tip },
+	opts = {
+		hl = "Type",
+		shrink_margin = false,
+		position = "center",
 	},
 }
 
@@ -184,15 +201,10 @@ local function mrp()
 		opts = {},
 	}
 end
-local function get_tip()
-	math.randomseed(os.time())
-	local tip_index = math.random(1, #tips)
-	return tips[tip_index]
-end
-local tip = get_tip()
 
 local section = {
 	header = default_header,
+	tip_sec = tip_sec,
 	-- note about MRU: currently this is a function,
 	-- since that means we can get a fresh mru
 	-- whenever there is a DirChanged. this is *really*
@@ -232,7 +244,7 @@ local section = {
 	bottom_buttons = {
 		type = "group",
 		val = {
-			button("q", "Quit\t tips: " .. tip, "<cmd>q <CR>"),
+			button("q", "Quit", "<cmd>q <CR>"),
 		},
 	},
 	footer = {
@@ -245,6 +257,7 @@ local config = {
 	layout = {
 		section.header,
 		{ type = "padding", val = 1 },
+		section.tip_sec,
 		section.top_buttons,
 		section.mru_cwd,
 		section.mru,
