@@ -24,6 +24,8 @@ vim.opt.listchars = {
 	eol = "↵",
 }
 vim.opt.list = true
+-- Remove a keymap
+-- vim.keymap.set('n', '<Space>', '<Nop>', { noremap = true })
 -- Remove the 'q:' keymap that opens the command window
 vim.api.nvim_set_keymap("n", "q:", ":", { noremap = true })
 -- 0 move to the 1st letter of the line

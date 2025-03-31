@@ -1,5 +1,6 @@
 local utils = require("alpha.utils")
 local project_nvim = require("project_nvim")
+local tips = require("config.tips")
 local if_nil = vim.F.if_nil
 local fnamemodify = vim.fn.fnamemodify
 local filereadable = vim.fn.filereadable
@@ -173,6 +174,9 @@ local function mrp()
 		short_fn = fnamemodify(fn, ":~")
 		local file_button_el = file_button(fn, tostring(i + start - 1), short_fn, opts.autocd)
 		tbl[i] = file_button_el
+		if i == 5 then
+			break
+		end
 	end
 	return {
 		type = "group",
@@ -180,9 +184,12 @@ local function mrp()
 		opts = {},
 	}
 end
-local function mru_title()
-	return "MRP"
+local function get_tip()
+	math.randomseed(os.time())
+	local tip_index = math.random(1, #tips)
+	return tips[tip_index]
 end
+local tip = get_tip()
 
 local section = {
 	header = default_header,
@@ -225,7 +232,7 @@ local section = {
 	bottom_buttons = {
 		type = "group",
 		val = {
-			button("q", "Quit", "<cmd>q <CR>"),
+			button("q", "Quit\t tips: " .. tip, "<cmd>q <CR>"),
 		},
 	},
 	footer = {

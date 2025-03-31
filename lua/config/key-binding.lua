@@ -20,9 +20,9 @@ function M.setup()
 		{ "<leader>dp", vim.diagnostic.goto_prev, desc = "previous diagnostic", icon = ICONS.left },
 		{ "<leader>dn", vim.diagnostic.goto_next, desc = "next diagnostics", icon = ICONS.right },
 		{ "<leader>f", group = "Files" }, -- Files
-		{ "<leader>fs", "<cmd>w<cr>", desc = "save file", icon = ICONS.save },
+		{ "<leader>fw", "<cmd>w<cr>", desc = "save file", icon = ICONS.save },
 		{ "<leader>fr", telescope.oldfiles, desc = "recent files", icon = ICONS.list },
-		{ "<leader>fq", "<cmd>wq<cr>", desc = "save and quit" },
+		{ "<leader>fq", "<cmd>q<cr>", desc = "save and quit" },
 		{ "<leader>fd", "<cmd>q!<cr>", desc = "Preference" },
 		{ "<leader>ff", telescope.find_files, desc = "find files" },
 		{ "<leader>fm", oil.toggle_float, desc = "file manager" },
@@ -54,13 +54,13 @@ function M.setup()
 		{ "<leader>ss", telescope.spell_suggest, desc = "show suggestion", icon = ICONS.list },
 		{ "<leader>sr", "<cmd>spellr<cr>", desc = "correct all" },
 		{ "<leader>t", group = "Telescope" }, -- Search
-		{ "<leader>ts", telescope.live_grep, desc = "search string" },
-		{ "<leader>tf", telescope.find_files, desc = "search files" },
+		{ "<leader>ts", telescope.live_grep, desc = "live grep" },
+		{ "<leader>tf", telescope.find_files, desc = "find files" },
 		{ "<leader>tl", telescope.current_buffer_fuzzy_find, desc = "search lines" },
 		{ "<leader>tm", "<cmd>Telescope notify<cr>", desc = "message history" },
-		{ "<leader>tp", "<cmd>Telescope projects<cr>", desc = "list projects" },
+		{ "<leader>tp", "<cmd>Telescope projects<cr>", desc = "projects" },
 		{ "<leader>tb", telescope.buffers, desc = "opened buffers" },
-		{ "<leader>tt", telescope.treesitter, desc = "list tags" },
+		{ "<leader>tt", telescope.treesitter, desc = "treesitter tags" },
 		{ "<leader>tr", telescope.registers, desc = "list registers" },
 		{ "<leader>w", group = "Windows" }, -- Windows
 		{ "<leader>wc", "<c-w>c", desc = "close window", icon = ICONS.cross },
@@ -72,7 +72,7 @@ function M.setup()
 		{ "<leader>wl", "<c-w>l", desc = "to right window", icon = ICONS.right },
 		{ "<leader>wt", key_funs.toggle_terminal, desc = "toggle terminal", icon = ICONS.terminal },
 		{ "<leader>x", group = "Misc.", icon = ICONS.debug }, -- Misc
-		{ "<leader>xx", telescope.current_buffer_fuzzy_find, desc = "try it", icon = ICONS.misc },
+		{ "<leader>xh", "<cmd>set hlsearch!<CR>", desc = "toggle highlight", icon = ICONS.misc },
 	})
 end
 
