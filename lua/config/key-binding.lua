@@ -10,8 +10,7 @@ local M = {}
 -- TODO: add a function to generate the keybindings
 vim.keymap.set("n", "<leader>ln", function()
 	return ":IncRename " .. vim.fn.expand("<cword>")
-end, { expr = true, desc = "jump to word" })
-
+end, { expr = true, desc = "rename" })
 function M.setup()
 	which_key.add({
 		-- hidden keys
@@ -21,6 +20,7 @@ function M.setup()
 		{ "<leader>k", key_funs.scroll_up, hidden = true },
 		{ "<leader>j", key_funs.scroll_down, hidden = true },
 		{ "<leader><leader>", "<Plug>(easymotion-bd-jk)", hidden = true },
+		{ "w", "<Plug>(easymotion-bd-fl)", hidden = true },
 		-- Buffers
 		{ "<leader>b", group = "Buffer", icon = ICONS.buf },
 		{ "<leader>bl", "<cmd>Telescope buffers<cr>", desc = "list buffers", icon = ICONS.list },
@@ -64,6 +64,7 @@ function M.setup()
 		{ "<leader>lh", vim.lsp.buf.hover, desc = "hover", icon = ICONS.hover },
 		{ "<leader>lr", vim.lsp.buf.references, desc = "show references", icon = ICONS.ref },
 		{ "<leader>lf", key_funs.format, desc = "format code" },
+		-- { "<leader>ln", vim.lsp.buf.rename, desc = "format code" },
 		{ "<leader>lt", telescope.treesitter, desc = "list tags", icon = ICONS.list },
 		-- Motion
 		{ "<leader>m", group = "Motion", icon = ICONS.motion },

@@ -11,8 +11,8 @@ return {
 				},
 			},
 		})
-		-- lspconfig.ruff.setup({})
-		lspconfig.pylsp.setup({})
+		lspconfig.pyright.setup({})
+		-- lspconfig.pylsp.setup({})
 		lspconfig.rust_analyzer.setup({})
 	end,
 }
