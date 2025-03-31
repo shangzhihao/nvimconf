@@ -2,20 +2,24 @@ local M = {}
 local dap = require("dap")
 local diag_jump = require("diag-jump")
 local which_key = require("which-key")
-local web_icons = require("nvim-web-devicons")
 local telescope = require("telescope.builtin")
-local get_icon = web_icons.get_icon
-local group = "WhichKeyGroup"
-local app_icon = get_icon("n.app", "app")
 
 local ICONS = {
-	buf = { icon = "", hl = group, color = "orange" },
-	question = { icon = "󱜸", hl = group, color = "red" },
-	check = { icon = "󰓆", hl = group, color = "cyan" },
-	error = { icon = "", hl = group, color = "red" },
-	lsp = { icon = "", hl = group, color = "azure" },
-	motion = { icon = "󱖳", hl = group, color = "green" },
-	python = { icon = "", hl = group, color = "purple" },
+	buf = { icon = "", color = "orange" },
+	save = { icon = "", color = "green" },
+	close = { icon = "󱙃", color = "red" },
+	discard = { icon = "󰮘", color = "red" },
+	question = { icon = "󱜸", color = "red" },
+	check = { icon = "󰓆", color = "cyan" },
+	good = { icon = "", color = "green" },
+	next = { icon = "", color = "cyan" },
+	prev = { icon = "", color = "cyan" },
+	error = { icon = "", color = "red" },
+	lsp = { icon = "", color = "azure" },
+	motion = { icon = "󱖳", color = "green" },
+	python = { icon = "", color = "purple" },
+	debug = { icon = "", color = "green" },
+	run = { icon = "", color = "green" },
 }
 
 function M.setup()
@@ -29,13 +33,14 @@ function M.setup()
 			desc = "Local Keymaps (which-key)",
 		},
 		{ "<leader>b", group = "Buffers", icon = ICONS.buf }, -- Buffers
-		{ "<leader>bl", "<cmd>Telescope buffers<cr>", desc = "list buffers" },
-		{ "<leader>bd", "<cmd>bd<cr>", desc = "close buffer" },
-		{ "<leader>bs", "<cmd>w<cr>", desc = "save buffer" },
+		{ "<leader>bl", "<cmd>Telescope buffers<cr>", desc = "list buffers", icon = ICONS.buf },
+		{ "<leader>bc", "<cmd>bd<cr>", desc = "close buffer", icon = ICONS.close },
+		{ "<leader>bd", "<cmd>bd!<cr>", desc = "discard and close", icon = ICONS.discard },
+		{ "<leader>bs", "<cmd>w<cr>", desc = "save buffer", icon = ICONS.buf_save },
 		{ "<leader>c", group = "Check spells", icon = ICONS.check }, -- Check spells
-		{ "<leader>cn", "]s", desc = "next misspelled" },
-		{ "<leader>cp", "[s", desc = "previous misspelled" },
-		{ "<leader>ca", "zg", desc = "add word to dict" },
+		{ "<leader>cn", "]s", desc = "next misspelled", icon = ICONS.next },
+		{ "<leader>cp", "[s", desc = "previous misspelled", icon = ICONS.prev },
+		{ "<leader>ca", "zg", desc = "add word to dict", icon = ICONS.good },
 		{ "<leader>cs", telescope.spell_suggest, desc = "show suggestion" },
 		{ "<leader>cr", "<cmd>spellr<cr>", desc = "correct all" },
 		{ "<leader>d", group = "Debug" }, -- Debug
@@ -53,7 +58,7 @@ function M.setup()
 		{ "<leader>ep", diag_jump.go_prev_diag, desc = "previous diagnostic" },
 		{ "<leader>en", diag_jump.go_next_diag, desc = "next diagnostics" },
 		{ "<leader>f", group = "Files" }, -- Files
-		{ "<leader>fs", "<cmd>w<cr>", desc = "save file" },
+		{ "<leader>fs", "<cmd>w<cr>", desc = "save file", icon = ICONS.save },
 		{ "<leader>fr", telescope.oldfiles, desc = "recent files" },
 		{ "<leader>fq", "<cmd>q<cr>", desc = "quit nvim" },
 		{ "<leader>ff", telescope.find_files, desc = "find files" },
@@ -71,6 +76,7 @@ function M.setup()
 		{ "<leader>lr", vim.lsp.buf.references, desc = "show references" },
 		{ "<leader>lf", vim.lsp.buf.format, desc = "format code" },
 		{ "<leader>lt", telescope.treesitter, desc = "list tags" },
+		{ "<leader>ln", vim.lsp.buf.rename, desc = "rename variable" },
 		{ "<leader>m", group = "Motion", icon = ICONS.motion }, -- Motion
 		{ "<leader>mm", "<Plug>(leap)", desc = "move in this window" },
 		{ "<leader>mb", "<Plug>(leap-backward)", desc = "move backward" },
@@ -86,8 +92,8 @@ function M.setup()
 		{ "<leader>wh", "<c-w>h", desc = "to left window" },
 		{ "<leader>wl", "<c-w>l", desc = "to right window" },
 		{ "<leader>p", group = "Python", icon = ICONS.python }, -- Python
-		{ "<leader>pr", "<cmd>!python %<cr>", desc = "run file" },
-		{ "<leader>pd", "<cmd>!python -m pdb %<cr>", desc = "run file" },
+		{ "<leader>pr", "<cmd>!python %<cr>", desc = "run file", icon = ICONS.run },
+		{ "<leader>pd", "<cmd>term python -m pdb %<cr>", desc = "debug file (pdb)", icon = ICONS.debug },
 	})
 end
 
