@@ -13,10 +13,10 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.spelllang = 'en_us'
 vim.opt.spell = true
-vim.opt.keywordprg="man -s"
 vim.opt.listchars = {
     tab = "│─",
-    eol = '↵',
+    trail="·",
+    eol = "↵",
 }
 vim.opt.list = true
 
@@ -25,3 +25,4 @@ vim.cmd("highlight NonText guibg=NONE ctermbg=NONE")
 vim.cmd("highlight LineNr guibg=NONE ctermbg=NONE")
 vim.cmd("highlight Folded guibg=NONE ctermbg=NONE")
 vim.api.nvim_set_keymap("n", "0", "^", { noremap = true, silent = true })
+

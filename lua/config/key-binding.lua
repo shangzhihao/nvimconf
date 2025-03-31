@@ -60,7 +60,8 @@ function M.setup()
 		{ "<leader>f", group = "Files" }, -- Files
 		{ "<leader>fs", "<cmd>w<cr>", desc = "save file", icon = ICONS.save },
 		{ "<leader>fr", telescope.oldfiles, desc = "recent files" },
-		{ "<leader>fq", "<cmd>q<cr>", desc = "quit nvim" },
+		{ "<leader>fq", "<cmd>wq<cr>", desc = "save and quit" },
+		{ "<leader>fd", "<cmd>q!<cr>", desc = "discard and quit" },
 		{ "<leader>ff", telescope.find_files, desc = "find files" },
 		{ "<leader>fm", "<cmd>Oil --float<cr>", desc = "file manager" },
 		{ "<leader>s", group = "Search" }, -- Search
