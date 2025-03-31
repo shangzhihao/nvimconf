@@ -5,8 +5,9 @@ return {
 	config = function()
 		require("nvim-surround").setup({
 			keymaps = {
-				normal = "sa",
-				delete = "sd",
+				normal = "S",
+				delete = "Sd",
+				visual = "S",
 			},
 		})
 	end,
