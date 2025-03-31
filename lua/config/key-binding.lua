@@ -1,9 +1,9 @@
 local M = {}
 local dap = require("dap")
-local utils = require("lua.user.utils")
+local utils = require("user.utils")
 local which_key = require("which-key")
 local telescope = require("telescope.builtin")
-local ICONS = require("lua.user.icons")
+local ICONS = require("user.icons")
 function M.setup()
 	which_key.add({
 		{
