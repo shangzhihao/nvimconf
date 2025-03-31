@@ -14,6 +14,8 @@ end, { expr = true })
 
 function M.setup()
 	which_key.add({
+		{ "<leader>k", key_funs.scroll_up, desc = "scroll up", icon = ICONS.up },
+		{ "<leader>j", key_funs.scroll_down, desc = "scroll down", icon = ICONS.down },
 		{ "<leader>b", group = "Buffers", icon = ICONS.buf }, -- Buffers
 		{ "<leader>bl", "<cmd>Telescope buffers<cr>", desc = "list buffers", icon = ICONS.list },
 		{ "<leader>bc", "<cmd>bd<cr>", desc = "close buffer", icon = ICONS.fclose },
@@ -21,25 +23,30 @@ function M.setup()
 		{ "<leader>bw", "<cmd>w<cr>", desc = "save buffer", icon = ICONS.save },
 		{ "<leader>bn", "<cmd>bnext<cr>", desc = "next buffer", icon = ICONS.right },
 		{ "<leader>bp", "<cmd>bprev<cr>", desc = "previous buffer", icon = ICONS.left },
-		{ "<leader>d", group = "Diagnostic", icon = ICONS.diag }, -- diagnostics Errors
-		{ "<leader>dd", key_funs.buf_diag, desc = "diagnostics in buffer", icon = ICONS.list },
-		{ "<leader>dw", telescope.diagnostics, desc = "diagnostics list in workspace", icon = ICONS.list },
-		{ "<leader>dp", vim.diagnostic.goto_prev, desc = "previous diagnostic", icon = ICONS.left },
-		{ "<leader>dn", vim.diagnostic.goto_next, desc = "next diagnostics", icon = ICONS.right },
+		{ "<leader>c", group = "Check spells", icon = ICONS.check }, -- Check spells
+		{ "<leader>cn", "]s", desc = "next misspelled", icon = ICONS.right },
+		{ "<leader>cp", "[s", desc = "previous misspelled", icon = ICONS.left },
+		{ "<leader>ca", "zg", desc = "add word to dict", icon = ICONS.good },
+		{ "<leader>cs", telescope.spell_suggest, desc = "show suggestion", icon = ICONS.list },
+		{ "<leader>cr", "<cmd>spellr<cr>", desc = "correct all" },
+		{ "<leader>d", group = "Debug", icon = ICONS.debug }, -- Debug
+		{ "<leader>db", dap.toggle_breakpoint, desc = "toggle breakpoint", icon = ICONS.breakpoint },
+		{ "<leader>dc", dap.continue, desc = "continue", icon = ICONS.run },
+		{ "<leader>dr", key_funs.run_file, desc = "run file", icon = ICONS.run },
+		{ "<leader>dd", key_funs.debug_file, desc = "debug (no ui)", icon = ICONS.debug },
+		{ "<leader>e", group = "Diagnostic", icon = ICONS.diag }, -- diagnostics Errors
+		{ "<leader>ed", key_funs.buf_diag, desc = "diagnostics in buffer", icon = ICONS.list },
+		{ "<leader>ew", telescope.diagnostics, desc = "diagnostics list in workspace", icon = ICONS.list },
+		{ "<leader>ep", vim.diagnostic.goto_prev, desc = "previous diagnostic", icon = ICONS.left },
+		{ "<leader>en", vim.diagnostic.goto_next, desc = "next diagnostics", icon = ICONS.right },
 		{ "<leader>f", group = "Files" }, -- Files
 		{ "<leader>fw", "<cmd>w<cr>", desc = "save file", icon = ICONS.save },
-		{ "<leader>fr", telescope.oldfiles, desc = "recent files", icon = ICONS.list },
+		{ "<leader>ff", "<cmd>Telescope smart_open<cr>", desc = "find files", icon = ICONS.list },
 		{ "<leader>fq", "<cmd>q<cr>", desc = "save and quit" },
 		{ "<leader>fd", "<cmd>q!<cr>", desc = "Preference" },
-		{ "<leader>ff", telescope.find_files, desc = "find files" },
 		{ "<leader>fm", oil.toggle_float, desc = "file manager" },
 		{ "<leader>fh", oil.toggle_hidden, desc = "toggle hidden" },
 		{ "<leader>fp", key_funs.setting_dir, desc = "file manager" },
-		{ "<leader>D", group = "Debug", icon = ICONS.debug }, -- Debug
-		{ "<leader>Db", dap.toggle_breakpoint, desc = "toggle breakpoint", icon = ICONS.breakpoint },
-		{ "<leader>Dc", dap.continue, desc = "continue", icon = ICONS.run },
-		{ "<leader>Dr", key_funs.run_file, desc = "run file", icon = ICONS.run },
-		{ "<leader>Dd", key_funs.debug_file, desc = "debug (no ui)", icon = ICONS.debug },
 		{ "<leader>l", group = "LSP", icon = ICONS.lsp }, -- LSP
 		{ "<leader>la", vim.lsp.buf.code_action, desc = "code action" },
 		{ "<leader>ld", vim.lsp.buf.definition, desc = "go to definition", icon = ICONS.motion },
@@ -53,16 +60,10 @@ function M.setup()
 		{ "<leader>mt", key_funs.scroll_top, desc = "cursor top", icon = ICONS.top },
 		{ "<leader>mc", key_funs.scroll_center, desc = "cursor center", icon = ICONS.center },
 		{ "<leader>mb", key_funs.scroll_bottom, desc = "cursor bottom", icon = ICONS.bottom },
-		{ "<leader>mk", key_funs.scroll_up, desc = "scroll up", icon = ICONS.up },
-		{ "<leader>mj", key_funs.scroll_down, desc = "scroll down", icon = ICONS.down },
 		{ "<leader>mh", "^", desc = "first letter", icon = ICONS.left },
 		{ "<leader>ml", "$", desc = "last letter", icon = ICONS.right },
-		{ "<leader>s", group = "Spells check", icon = ICONS.check }, -- Check spells
-		{ "<leader>sn", "]s", desc = "next misspelled", icon = ICONS.right },
-		{ "<leader>sp", "[s", desc = "previous misspelled", icon = ICONS.left },
-		{ "<leader>sa", "zg", desc = "add word to dict", icon = ICONS.good },
-		{ "<leader>ss", telescope.spell_suggest, desc = "show suggestion", icon = ICONS.list },
-		{ "<leader>sr", "<cmd>spellr<cr>", desc = "correct all" },
+		{ "<leader>s", group = "Search" }, -- Search
+		{ "<leader>sr", "<cmd>GrugFar<cr>", desc = "search-replace" },
 		{ "<leader>t", group = "Telescope" }, -- Search
 		{ "<leader>tt", telescope.builtin, desc = "builtin pickers" },
 		{ "<leader>to", key_funs.todolist, desc = "list todos" },

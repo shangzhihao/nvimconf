@@ -31,6 +31,11 @@ vim.api.nvim_set_keymap("v", "q:", "<Nop>", { noremap = true })
 vim.api.nvim_set_keymap("n", "q:", "<Nop>", { noremap = true })
 vim.api.nvim_set_keymap("t", "q:", "<Nop>", { noremap = true })
 vim.api.nvim_set_keymap("x", "q:", "<Nop>", { noremap = true })
+--  use t to move backward
+vim.api.nvim_set_keymap("v", "t", "F", { noremap = true })
+vim.api.nvim_set_keymap("n", "t", "F", { noremap = true })
+vim.api.nvim_set_keymap("t", "t", "F", { noremap = true })
+vim.api.nvim_set_keymap("x", "t", "F", { noremap = true })
 -- r for redo
 vim.api.nvim_set_keymap("n", "r", "<C-r>", { noremap = true, silent = true })
 -- esc to return normal mode in terminal
