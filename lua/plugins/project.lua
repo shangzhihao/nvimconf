@@ -7,11 +7,8 @@ return {
 
 			-- All the patterns used to detect root dir, when **"pattern"** is in
 			-- detection_methods
-			patterns = { ".git", "pyproject.toml", "Cargo.toml", "Makefile", "package.json" },
-
-			-- Table of lsp clients to ignore by name
-			-- eg: { "efm", ... }
-			ignore_lsp = {},
+			-- .nvimproj is a flag that makes a folder nvim project
+			patterns = { ".git", "pyproject.toml", "Cargo.toml", "Makefile", ".nvimproj" },
 
 			-- Don't calculate root dir on specific directories
 			-- Ex: { "~/.cargo/*", ... }
@@ -22,7 +19,7 @@ return {
 
 			-- When set to false, you will get a message when project.nvim changes your
 			-- directory.
-			silent_chdir = true,
+			silent_chdir = false,
 
 			-- What scope to change the directory, valid options are
 			-- * global (default)

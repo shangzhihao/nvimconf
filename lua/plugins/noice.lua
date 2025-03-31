@@ -3,9 +3,7 @@ return {
 		"rcarriga/nvim-notify",
 		config = function()
 			local notify = require("notify")
-			notify.setup({
-				level = vim.log.levels.WARN, -- Set to WARN level, which will show WARN and ERROR messages only
-			})
+			notify.setup({})
 		end,
 	},
 	{
