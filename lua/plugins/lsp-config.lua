@@ -18,7 +18,6 @@ return {
             lspconfig.lua_ls.setup({})
             lspconfig.clangd.setup({})
             lspconfig.pylsp.setup({})
-            -- lspconfig.ruff.setup({})
         end,
     },
 }
