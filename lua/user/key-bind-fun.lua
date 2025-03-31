@@ -4,7 +4,7 @@ local code_runner = require("user.code-runner")
 local oil = require("oil")
 local conform = require("conform")
 local terminal = utils.get_term("Terminal", nil, true)
-
+local neoscroll = require("neoscroll")
 M = {}
 
 M.toggle_wrap = function()
@@ -28,4 +28,16 @@ M.setting_dir = function()
 	local config_dir = vim.fn.stdpath("config")
 	oil.toggle_float(config_dir)
 end
+M.scroll_up = function()
+	neoscroll.scroll(-0.3, { move_cursor = true, duration = 200 })
+end
+M.scroll_down = function()
+	neoscroll.scroll(0.3, { move_cursor = true, duration = 200 })
+end
+M.todolist = function()
+	local cwd = vim.fn.getcwd()
+	local cmd = "TodoTelescope cwd=" .. cwd
+	vim.cmd(cmd)
+end
+
 return M

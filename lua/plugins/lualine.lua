@@ -6,6 +6,7 @@ local macro = function()
 		return "󰑋" .. reg
 	end
 end
+
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -13,9 +14,10 @@ return {
 		local line = require("lualine")
 		line.setup({
 			sections = {
+				lualine_a = { "mode", macro },
+				lualine_b = { "diagnostics" },
 				lualine_c = {
-					"filename",
-					macro,
+					{ "buffers", hide_filename_extension = true },
 				},
 			},
 		})
