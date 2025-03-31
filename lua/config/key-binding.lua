@@ -43,6 +43,7 @@ function M.setup()
 		{ "<leader>s", group = "Search" }, -- Search
 		{ "<leader>ss", telescope.live_grep, desc = "search string" },
 		{ "<leader>sf", telescope.find_files, desc = "search files" },
+		{ "<leader>sm", "<cmd>:Telescope notify<cr>", desc = "message history" },
 		{ "<leader>sp", "<cmd>Telescope projects<cr>", desc = "search project" },
 		{ "<leader>sb", telescope.buffers, desc = "search buffers" },
 		{ "<leader>st", telescope.treesitter, desc = "search tags" },
