@@ -26,3 +26,4 @@ vim.opt.listchars = {
 	extends = "»",
 }
 vim.opt.list = true
+vim.opt.signcolumn = "yes"

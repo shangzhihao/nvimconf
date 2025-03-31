@@ -1,4 +1,3 @@
-local proj_nvim = require("project_nvim")
 local Path = require("plenary.path")
 local togg_term = require("toggleterm.terminal")
 local Terminal = togg_term.Terminal

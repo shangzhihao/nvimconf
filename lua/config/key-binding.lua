@@ -1,11 +1,8 @@
-local dap = require("dap")
 local which_key = require("which-key")
 local telescope = require("telescope.builtin")
 local oil = require("oil")
 local key_funs = require("user.key-bind-fun")
 local ICONS = require("config.icons")
-local ufo = require("ufo")
-local neogen = require("neogen")
 local M = {}
 -- TODO: add a function to generate the keybindings
 vim.keymap.set("n", "<leader>ln", function()
@@ -36,12 +33,6 @@ function M.setup()
 		{ "<leader>ca", "zg", desc = "add word to dict", icon = ICONS.good },
 		{ "<leader>cs", telescope.spell_suggest, desc = "show suggestion", icon = ICONS.list },
 		{ "<leader>cr", "<cmd>spellr<cr>", desc = "correct all" },
-		-- Debug
-		{ "<leader>d", group = "Debug", icon = ICONS.debug },
-		{ "<leader>db", dap.toggle_breakpoint, desc = "toggle breakpoint", icon = ICONS.breakpoint },
-		{ "<leader>dc", dap.continue, desc = "continue", icon = ICONS.run },
-		{ "<leader>dd", key_funs.debug_file, desc = "debug (no ui)", icon = ICONS.debug },
-		{ "<leader>dr", key_funs.run_file, desc = "run file", icon = ICONS.run },
 		-- Errors
 		{ "<leader>e", group = "Errors", icon = ICONS.diag },
 		{ "<leader>ed", key_funs.buf_diag, desc = "errors in buffer", icon = ICONS.list },
@@ -54,9 +45,8 @@ function M.setup()
 		{ "<leader>ff", "<cmd>Telescope smart_open<cr>", desc = "find files", icon = ICONS.list },
 		{ "<leader>fq", "<cmd>q<cr>", desc = "save and quit" },
 		{ "<leader>fd", "<cmd>q!<cr>", desc = "discard and quit" },
-		{ "<leader>fm", oil.toggle_float, desc = "file manager" },
-		{ "<leader>fh", oil.toggle_hidden, desc = "toggle hidden" },
-		{ "<leader>fp", key_funs.setting_dir, desc = "file manager" },
+		{ "<leader>fm", oil.toggle_float, desc = "oil file manager" },
+		{ "<leader>fh", oil.toggle_hidden, desc = "oil toggle hidden" },
 		-- LSP
 		{ "<leader>l", group = "LSP", icon = ICONS.lsp },
 		{ "<leader>la", vim.lsp.buf.code_action, desc = "code action" },
@@ -64,7 +54,6 @@ function M.setup()
 		{ "<leader>lh", vim.lsp.buf.hover, desc = "hover", icon = ICONS.hover },
 		{ "<leader>lr", vim.lsp.buf.references, desc = "show references", icon = ICONS.ref },
 		{ "<leader>lf", key_funs.format, desc = "format code" },
-		-- { "<leader>ln", vim.lsp.buf.rename, desc = "format code" },
 		{ "<leader>lt", telescope.treesitter, desc = "list tags", icon = ICONS.list },
 		-- Motion
 		{ "<leader>m", group = "Motion", icon = ICONS.motion },
@@ -101,12 +90,6 @@ function M.setup()
 		{ "<leader>x", group = "Misc.", icon = ICONS.debug },
 		{ "<leader>xh", "<cmd>set hlsearch!<CR>", desc = "toggle highlight", icon = ICONS.misc },
 		{ "<leader>xw", key_funs.toggle_wrap, desc = "toggle wrap", icon = ICONS.misc },
-		{ "<leader>xd", neogen.generate, desc = "generate doc", icon = ICONS.misc },
-		-- Fold
-		{ "<leader>z", group = "Fold", icon = ICONS.fold },
-		{ "<leader>zr", ufo.openAllFolds, desc = "open all folds", icon = ICONS.fold },
-		{ "<leader>zm", ufo.closeAllFolds, desc = "close all folds", icon = ICONS.fold },
-		{ "<leader>zh", ufo.peekFoldedLinesUnderCursor, desc = "peek folded lines", icon = ICONS.fold },
 	})
 end
 return M

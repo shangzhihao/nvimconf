@@ -1,6 +1,5 @@
 local telescope = require("telescope.builtin")
 local utils = require("user.utils")
-local code_runner = require("user.code-runner")
 local oil = require("oil")
 local conform = require("conform")
 local terminal = utils.get_term("Terminal", nil, true)
@@ -21,12 +20,6 @@ end
 
 M.buf_diag = function()
 	telescope.diagnostics({ bufnr = 0 })
-end
-M.run_file = code_runner.run_file
-M.debug_file = code_runner.debug_file
-M.setting_dir = function()
-	local config_dir = vim.fn.stdpath("config")
-	oil.toggle_float(config_dir)
 end
 M.scroll_up = function()
 	neoscroll.scroll(-0.3, { move_cursor = true, duration = 200 })
