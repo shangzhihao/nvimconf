@@ -76,5 +76,4 @@ M.get_term = function(title, cmd, is_close)
 	opt.cmd = cmd
 	return Terminal:new(opt)
 end
-
 return M

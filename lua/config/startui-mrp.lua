@@ -180,21 +180,31 @@ local function mru(start, cwd, items_number, opts)
 		opts = {},
 	}
 end
+
 local function mrp()
 	local tbl = {}
 	local start = 0
 	local opts = mru_opts
 	local recent_projects = project_nvim.get_recent_projects()
-	print(vim.inspect(recent_projects))
-	for i, fn in ipairs(recent_projects) do
-		local short_fn
-		short_fn = fnamemodify(fn, ":~")
-		local file_button_el = file_button(fn, tostring(i + start - 1), short_fn, opts.autocd)
-		tbl[i] = file_button_el
-		if i == 5 then
-			break
+	local total_projects = #recent_projects
+	local start_idx = math.max(1, total_projects - 4) -- Start from (total - 4) to get last 5
+
+	-- Process the last 5 (or fewer) projects
+	for i = start_idx, total_projects do
+		local fn = recent_projects[i]
+		if fn then
+			local short_fn = vim.fn.fnamemodify(fn, ":~")
+			local button_idx = i - start_idx + start
+			local file_button_el = file_button(
+				fn, -- full path
+				tostring(button_idx), -- index
+				short_fn, -- displayed path
+				opts.autocd or false -- auto change directory option
+			)
+			tbl[i - start_idx + 1] = file_button_el
 		end
 	end
+
 	return {
 		type = "group",
 		val = tbl,
@@ -221,7 +231,7 @@ local section = {
 			{
 				type = "group",
 				val = function()
-					return { mru(5, nil, 5) }
+					return { mru(5, nil, 8) }
 				end,
 			},
 		},

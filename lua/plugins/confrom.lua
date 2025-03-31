@@ -4,7 +4,8 @@ return {
 		require("conform").setup({
 			formatters_by_ft = {
 				lua = { "stylua" },
-				python = { "isort", "black" },
+				python = { "ruff_format", "ruff_organize_imports", "ruff_fix" },
+				-- python = { "isort", "black" },
 				rust = { "rustfmt", lsp_format = "fallback" },
 				java = { "google-java-format" },
 			},

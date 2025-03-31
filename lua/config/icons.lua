@@ -26,4 +26,5 @@ return {
 	ref = { icon = "", color = "green" },
 	breakpoint = { icon = "", color = "red" },
 	misc = { icon = "", color = "cyan" },
+	fold = { icon = "", color = "green" },
 }

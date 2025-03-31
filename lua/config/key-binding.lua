@@ -56,13 +56,13 @@ function M.setup()
 		{ "<leader>mp", vim.diagnostic.goto_prev, desc = "previous diagnostic", icon = ICONS.left },
 		{ "<leader>mn", vim.diagnostic.goto_next, desc = "next diagnostic", icon = ICONS.right },
 		{ "<leader>s", group = "Spells check", icon = ICONS.check }, -- Check spells
-		{ "<leader>sn", "]s", desc = "next misspelled", icon = ICONS.left },
-		{ "<leader>sp", "[s", desc = "previous misspelled", icon = ICONS.right },
+		{ "<leader>sn", "]s", desc = "next misspelled", icon = ICONS.right },
+		{ "<leader>sp", "[s", desc = "previous misspelled", icon = ICONS.left },
 		{ "<leader>sa", "zg", desc = "add word to dict", icon = ICONS.good },
 		{ "<leader>ss", telescope.spell_suggest, desc = "show suggestion", icon = ICONS.list },
 		{ "<leader>sr", "<cmd>spellr<cr>", desc = "correct all" },
 		{ "<leader>t", group = "Telescope" }, -- Search
-		{ "<leader>tt", telescope.builtin, desc = "telescope functions" },
+		{ "<leader>tt", telescope.builtin, desc = "builtin pickers" },
 		{ "<leader>to", key_funs.todolist, desc = "list todos" },
 		{ "<leader>ts", telescope.live_grep, desc = "live grep" },
 		{ "<leader>tf", telescope.find_files, desc = "find files" },
@@ -71,7 +71,7 @@ function M.setup()
 		{ "<leader>tp", "<cmd>Telescope projects<cr>", desc = "projects" },
 		{ "<leader>tb", telescope.buffers, desc = "opened buffers" },
 		{ "<leader>tn", telescope.treesitter, desc = "treesitter names" },
-		{ "<leader>tr", telescope.registers, desc = "list registers" },
+		{ "<leader>tr", telescope.registers, desc = "registers" },
 		{ "<leader>w", group = "Windows" }, -- Windows
 		{ "<leader>wc", "<c-w>c", desc = "close window", icon = ICONS.cross },
 		{ "<leader>ws", "<c-w>s", desc = "split window", icon = ICONS.horizontal },
@@ -84,11 +84,11 @@ function M.setup()
 		{ "<leader>x", group = "Misc.", icon = ICONS.debug }, -- Misc
 		{ "<leader>xh", "<cmd>set hlsearch!<CR>", desc = "toggle highlight", icon = ICONS.misc },
 		{ "<leader>xw", key_funs.toggle_wrap, desc = "toggle wrap", icon = ICONS.misc },
-		{ "<leader>xd", require("neogen").generate, desc = "toggle wrap", icon = ICONS.misc },
-		{ "<leader>z", group = "Fold", icon = ICONS.debug }, -- Misc
-		{ "<leader>zo", require("ufo").openAllFolds, desc = "open all folds", icon = ICONS.misc },
-		{ "<leader>zc", require("ufo").closeAllFolds, desc = "close all folds", icon = ICONS.misc },
-		{ "<leader>zh", require("ufo").peekFoldedLinesUnderCursor, desc = "peek folded lines", icon = ICONS.misc },
+		{ "<leader>xd", require("neogen").generate, desc = "generate doc", icon = ICONS.misc },
+		{ "<leader>z", group = "Fold", icon = ICONS.fold }, -- Fold
+		{ "<leader>zo", require("ufo").openAllFolds, desc = "open all folds", icon = ICONS.fold },
+		{ "<leader>zc", require("ufo").closeAllFolds, desc = "close all folds", icon = ICONS.fold },
+		{ "<leader>zh", require("ufo").peekFoldedLinesUnderCursor, desc = "peek folded lines", icon = ICONS.fold },
 	})
 end
 
