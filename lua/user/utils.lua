@@ -1,9 +1,8 @@
 local proj_nvim = require("project_nvim")
 local Path = require("plenary.path")
-local telescope = require("telescope.builtin")
-local pl_ft = require("plenary.filetype")
-local Terminal = require("toggleterm.terminal").Terminal
-local debugger_cmd = require("config.debugger-cmd")
+local togg_term = require("toggleterm.terminal")
+local Terminal = togg_term.Terminal
+local term_opt = vim.g.my_float_term_opt
 
 local M = {}
 
@@ -38,14 +37,6 @@ M.chdir = function()
 	vim.cmd("lcd " .. tostring(current_folder))
 end
 
-local ext_to_runner = function(ext)
-	return debugger_cmd.runner_mapping[ext]
-end
-
-local ext_to_debugger = function(ext)
-	return debugger_cmd.debugger_mapping[ext]
-end
-
 M.check_command = function(command)
 	-- Use the `system` function to execute shell commands
 	local handle, _ = io.popen("which " .. command)
@@ -62,70 +53,28 @@ M.check_command = function(command)
 	end
 end
 
-local term_opt = {
-	direction = "float",
-	display_name = "Terminal",
-	cmd = nil,
-	close_on_exit = true,
-	clear_env = false,
-	float_opts = {
-		border = "curved",
-		winblend = 3,
-		highlights = {
-			border = "Normal",
-			background = "Normal",
-		},
-		width = function()
-			return math.floor(vim.o.columns * 0.8)
-		end,
-		height = function()
-			return math.floor(vim.o.lines * 0.8)
-		end,
-	},
-}
-
-M.toggle_terminal = function()
-	term_opt.dir = vim.fn.getcwd()
-	term_opt.display_name = "terminal"
-	term_opt.close_on_exit = true
-	term_opt.cmd = nil
-	local termnal = Terminal:new(term_opt)
-	termnal:toggle()
-end
-M.run_file = function()
-	local fname = vim.api.nvim_buf_get_name(0)
-	local ftype = pl_ft.detect_from_extension(fname)
-	term_opt.display_name = ftype
-	term_opt.dir = vim.fn.getcwd()
-	term_opt.close_on_exit = false
-	local runner = ext_to_runner(ftype)
-	if not runner then
-		vim.notify("no runner for current buffer", vim.log.levels.WARN)
-		return
+local function deepcopy(orig)
+	local copy
+	if type(orig) == "table" then
+		copy = {}
+		for key, value in pairs(orig) do
+			copy[deepcopy(key)] = deepcopy(value)
+		end
+		setmetatable(copy, deepcopy(getmetatable(orig)))
+	else
+		copy = orig
 	end
-	term_opt.cmd = runner .. " " .. vim.api.nvim_buf_get_name(0)
-	local termnal = Terminal:new(term_opt)
-	termnal:toggle()
+	return copy
 end
+M.deepcopy = deepcopy
 
-M.noui_debug = function()
-	local fname = vim.api.nvim_buf_get_name(0)
-	local ftype = pl_ft.detect_from_extension(fname)
-	term_opt.display_name = ftype .. " debug"
-	term_opt.dir = vim.fn.getcwd()
-	term_opt.close_on_exit = true
-	local debugger = ext_to_debugger(ftype)
-	if not debugger then
-		vim.notify("no debugger for current buffer", vim.log.levels.WARN)
-		return
-	end
-	term_opt.cmd = debugger .. " " .. vim.api.nvim_buf_get_name(0)
-	local termnal = Terminal:new(term_opt)
-	termnal:toggle()
-end
-
-M.buf_diag = function()
-	telescope.diagnostics({ bufnr = 0 })
+M.get_term = function(title, cmd, is_close)
+	local opt = deepcopy(term_opt)
+	opt.dir = vim.fn.getcwd()
+	opt.display_name = title
+	opt.close_on_exit = is_close
+	opt.cmd = cmd
+	return Terminal:new(opt)
 end
 
 return M

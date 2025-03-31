@@ -53,5 +53,11 @@ ALL: winget install GnuWin32.Tar cURL.cURL sharkdp.fd BurntSushi.ripgrep.MSVC LL
 The folder that mason installs language server is ~/AppData/Local/nvim-data/mason/bin.
 Add the folder to PATH if NeoVim cannot find installed language servers.
 
+### The code
+lua code in the lua/user are mostly about key-bindings.
+the invocation chain is utils->other->key-bind-fun->key-bindings
+
+
+
 
 

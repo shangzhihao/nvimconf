@@ -1,10 +1,10 @@
-local M = {}
 local dap = require("dap")
 local which_key = require("which-key")
 local telescope = require("telescope.builtin")
 local oil = require("oil")
+local key_funs = require("user.key-bind-fun")
 local ICONS = require("config.icons")
-local utils = require("user.utils")
+local M = {}
 
 local show_keymap = function()
 	which_key.show({ global = false })
@@ -27,7 +27,7 @@ function M.setup()
 		{ "<leader>cs", telescope.spell_suggest, desc = "show suggestion", icon = ICONS.list },
 		{ "<leader>cr", "<cmd>spellr<cr>", desc = "correct all" },
 		{ "<leader>d", group = "Diagnostic", icon = ICONS.diag }, -- diagnostics Errors
-		{ "<leader>dd", utils.buf_diag, desc = "diagnostics in buffer", icon = ICONS.list },
+		{ "<leader>dd", key_funs.buf_diag, desc = "diagnostics in buffer", icon = ICONS.list },
 		{ "<leader>dw", telescope.diagnostics, desc = "diagnostics list in workspace", icon = ICONS.list },
 		{ "<leader>dp", vim.diagnostic.goto_prev, desc = "previous diagnostic", icon = ICONS.left },
 		{ "<leader>dn", vim.diagnostic.goto_next, desc = "next diagnostics", icon = ICONS.right },
@@ -60,8 +60,8 @@ function M.setup()
 		{ "<leader>mm", "<Plug>(leap)", desc = "move in this window", icon = ICONS.motion },
 		{ "<leader>mb", "<Plug>(leap-backward)", desc = "move backward", icon = ICONS.left },
 		{ "<leader>mf", "<Plug>(leap-forward)", desc = "move forward", icon = ICONS.right },
-		{ "<leader>mp", utils.go_prev_diag, desc = "previous diagnostic", icon = ICONS.left },
-		{ "<leader>mn", utils.go_next_diag, desc = "next diagnostic", icon = ICONS.right },
+		{ "<leader>mp", vim.diagnostic.goto_prev, desc = "previous diagnostic", icon = ICONS.left },
+		{ "<leader>mn", vim.diagnostic.goto_next, desc = "next diagnostic", icon = ICONS.right },
 		{ "<leader>w", group = "Windows" }, -- Windows
 		{ "<leader>wc", "<c-w>c", desc = "close window", icon = ICONS.cross },
 		{ "<leader>ws", "<c-w>s", desc = "split window", icon = ICONS.horizontal },
@@ -70,12 +70,12 @@ function M.setup()
 		{ "<leader>wk", "<c-w>k", desc = "to upper window", icon = ICONS.up },
 		{ "<leader>wh", "<c-w>h", desc = "to left window", icon = ICONS.left },
 		{ "<leader>wl", "<c-w>l", desc = "to right window", icon = ICONS.right },
-		{ "<leader>wt", utils.toggle_terminal, desc = "toggle terminal", icon = ICONS.terminal },
+		{ "<leader>wt", key_funs.toggle_terminal, desc = "toggle terminal", icon = ICONS.terminal },
 		{ "<leader>g", group = "debuG", icon = ICONS.debug }, -- Python
 		{ "<leader>gb", dap.toggle_breakpoint, desc = "toggle breakpoint", icon = ICONS.breakpoint },
 		{ "<leader>gc", dap.continue, desc = "continue", icon = ICONS.run },
-		{ "<leader>gr", utils.run_file, desc = "run file", icon = ICONS.run },
-		{ "<leader>gd", utils.noui_debug, desc = "debug (no ui)", icon = ICONS.debug },
+		{ "<leader>gr", key_funs.run_file, desc = "run file", icon = ICONS.run },
+		{ "<leader>gd", key_funs.debug_file, desc = "debug (no ui)", icon = ICONS.debug },
 	})
 end
 

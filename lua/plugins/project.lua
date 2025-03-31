@@ -8,7 +8,7 @@ return {
 			-- All the patterns used to detect root dir, when **"pattern"** is in
 			-- detection_methods
 			-- .nvimproj is a flag that makes a folder nvim project
-			patterns = { ".git", "pyproject.toml", "Cargo.toml", "Makefile", ".nvimproj" },
+			patterns = { ".git", "pyproject.toml", "Cargo.toml", "Makefile", ".nvimproj", "gradlew" },
 
 			-- Don't calculate root dir on specific directories
 			-- Ex: { "~/.cargo/*", ... }
