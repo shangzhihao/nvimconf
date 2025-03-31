@@ -9,16 +9,9 @@ return {
         which_key.setup({
             delay = 800,
         })
+        require("nvim-web-devicons").setup()
         require("config.key-binding").setup()
     end,
     opts = {},
-    keys = {
-        {
-            "<leader>?",
-            function()
-                require("which-key").show({ global = false })
-            end,
-            desc = "Local Keymaps (which-key)",
-        },
-    },
+    keys = {},
 }

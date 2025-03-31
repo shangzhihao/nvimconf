@@ -17,16 +17,8 @@ return {
             local lspconfig = require("lspconfig")
             lspconfig.lua_ls.setup({})
             lspconfig.clangd.setup({})
-            lspconfig.pylsp.setup({
-                settings = {
-                    plugins = {
-                        pycodestyle = {
-                            ignore = { "W391" },
-                            maxLineLength = 120,
-                        },
-                    },
-                },
-            })
+            lspconfig.pylsp.setup({})
+            -- lspconfig.ruff.setup({})
         end,
     },
 }
