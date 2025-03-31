@@ -1,3 +1,3 @@
 require("config.lazy")
 require("config.vim-options")
-require("user.nvimrc")
+require("user.autocmd")

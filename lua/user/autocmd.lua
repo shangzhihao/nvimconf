@@ -4,7 +4,10 @@ vim.api.nvim_create_autocmd("DirChanged", {
 	pattern = "*",
 	callback = function()
 		local cwd = vim.fn.getcwd()
-		local short_cwd = vim.fn.fnamemodify(cwd, ":~")
+		local short_cwd = cwd
+		if utils.is_subdir("/Users/shang/", cwd) then
+			short_cwd = vim.fn.fnamemodify(cwd, ":~")
+		end
 		vim.notify("cwd to " .. short_cwd, vim.log.levels.INFO)
 	end,
 })
