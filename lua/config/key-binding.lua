@@ -2,22 +2,19 @@ local M = {}
 local dap = require("dap")
 local which_key = require("which-key")
 local telescope = require("telescope.builtin")
-local Terminal = require("toggleterm.terminal").Terminal
-local pl_ft = require("plenary.filetype")
-
+local oil = require("oil")
 local ICONS = require("user.icons")
 local utils = require("user.utils")
 
+local show_keymap = function()
+	which_key.show({ global = false })
+end
+local setting_dir = function()
+	oil.toggle_float("~/.config/nvim")
+end
 function M.setup()
 	which_key.add({
-		{
-			"<leader>?",
-			function()
-				which_key.show({ global = false })
-			end,
-			icon = ICONS.question,
-			desc = "Local Keymaps (which-key)",
-		},
+		{ "<leader>?", show_keymap, icon = ICONS.question, desc = "Local Keymaps (which-key)" },
 		{ "<leader>b", group = "Buffers", icon = ICONS.buf }, -- Buffers
 		{ "<leader>bl", "<cmd>Telescope buffers<cr>", desc = "list buffers", icon = ICONS.list },
 		{ "<leader>bc", "<cmd>bd<cr>", desc = "close buffer", icon = ICONS.fclose },
@@ -30,14 +27,7 @@ function M.setup()
 		{ "<leader>cs", telescope.spell_suggest, desc = "show suggestion", icon = ICONS.list },
 		{ "<leader>cr", "<cmd>spellr<cr>", desc = "correct all" },
 		{ "<leader>d", group = "Diagnostic", icon = ICONS.diag }, -- diagnostics Errors
-		{
-			"<leader>dd",
-			function()
-				telescope.diagnostics({ bufnr = 0 })
-			end,
-			desc = "diagnostics in buffer",
-			icon = ICONS.list,
-		},
+		{ "<leader>dd", utils.buf_diag, desc = "diagnostics in buffer", icon = ICONS.list },
 		{ "<leader>dw", telescope.diagnostics, desc = "diagnostics list in workspace", icon = ICONS.list },
 		{ "<leader>dp", vim.diagnostic.goto_prev, desc = "previous diagnostic", icon = ICONS.left },
 		{ "<leader>dn", vim.diagnostic.goto_next, desc = "next diagnostics", icon = ICONS.right },
@@ -45,9 +35,11 @@ function M.setup()
 		{ "<leader>fs", "<cmd>w<cr>", desc = "save file", icon = ICONS.save },
 		{ "<leader>fr", telescope.oldfiles, desc = "recent files", icon = ICONS.list },
 		{ "<leader>fq", "<cmd>wq<cr>", desc = "save and quit" },
-		{ "<leader>fd", "<cmd>q!<cr>", desc = "discard and quit" },
+		{ "<leader>fd", "<cmd>q!<cr>", desc = "Preference" },
 		{ "<leader>ff", telescope.find_files, desc = "find files" },
-		{ "<leader>fm", "<cmd>Oil --float<cr>", desc = "file manager" },
+		{ "<leader>fm", oil.toggle_float, desc = "file manager" },
+		{ "<leader>fh", oil.toggle_hidden, desc = "file manager" },
+		{ "<leader>fp", setting_dir, desc = "file manager" },
 		{ "<leader>s", group = "Search" }, -- Search
 		{ "<leader>ss", telescope.live_grep, desc = "search string" },
 		{ "<leader>sf", telescope.find_files, desc = "search files" },
@@ -77,66 +69,12 @@ function M.setup()
 		{ "<leader>wk", "<c-w>k", desc = "to upper window", icon = ICONS.up },
 		{ "<leader>wh", "<c-w>h", desc = "to left window", icon = ICONS.left },
 		{ "<leader>wl", "<c-w>l", desc = "to right window", icon = ICONS.right },
-		{
-			"<leader>wt",
-			function()
-				local term_opt = utils.term_opt
-				term_opt.dir = vim.fn.getcwd()
-				term_opt.display_name = "terminal"
-				term_opt.close_on_exit = true
-				term_opt.cmd = nil
-				local termnal = Terminal:new(term_opt)
-				termnal:toggle()
-			end,
-			desc = "toggle terminal",
-			icon = ICONS.terminal,
-		},
+		{ "<leader>wt", utils.toggle_terminal, desc = "toggle terminal", icon = ICONS.terminal },
 		{ "<leader>g", group = "debuG", icon = ICONS.debug }, -- Python
 		{ "<leader>gb", dap.toggle_breakpoint, desc = "toggle breakpoint", icon = ICONS.breakpoint },
 		{ "<leader>gc", dap.continue, desc = "continue", icon = ICONS.run },
-		{
-			"<leader>gr",
-
-			function()
-				local term_opt = utils.term_opt
-				local fname = vim.api.nvim_buf_get_name(0)
-				local ftype = pl_ft.detect_from_extension(fname)
-				term_opt.display_name = ftype
-				term_opt.dir = vim.fn.getcwd()
-				term_opt.close_on_exit = false
-				local runner = utils.ext_to_runner(ftype)
-				if not runner then
-					vim.notify("no runner for current buffer", vim.log.levels.WARN)
-					return
-				end
-				term_opt.cmd = runner .. " " .. vim.api.nvim_buf_get_name(0)
-				local termnal = Terminal:new(term_opt)
-				termnal:toggle()
-			end,
-			desc = "run file",
-			icon = ICONS.run,
-		},
-		{
-			"<leader>gd",
-			function()
-				local term_opt = utils.term_opt
-				local fname = vim.api.nvim_buf_get_name(0)
-				local ftype = pl_ft.detect_from_extension(fname)
-				term_opt.display_name = ftype .. " debug"
-				term_opt.dir = vim.fn.getcwd()
-				term_opt.close_on_exit = true
-				local debugger = utils.ext_to_debugger(ftype)
-				if not debugger then
-					vim.notify("no debugger for current buffer", vim.log.levels.WARN)
-					return
-				end
-				term_opt.cmd = debugger .. " " .. vim.api.nvim_buf_get_name(0)
-				local termnal = Terminal:new(term_opt)
-				termnal:toggle()
-			end,
-			desc = "debug (no ui)",
-			icon = ICONS.debug,
-		},
+		{ "<leader>gr", utils.run_file, desc = "run file", icon = ICONS.run },
+		{ "<leader>gd", utils.noui_debug, desc = "debug (no ui)", icon = ICONS.debug },
 	})
 end
 

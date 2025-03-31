@@ -1,6 +1,8 @@
 local proj_nvim = require("project_nvim")
 local Path = require("plenary.path")
-
+local telescope = require("telescope.builtin")
+local pl_ft = require("plenary.filetype")
+local Terminal = require("toggleterm.terminal").Terminal
 local debugger_cmd = require("config.debugger-cmd")
 
 local M = {}
@@ -35,11 +37,12 @@ M.chdir = function()
 	end
 	vim.cmd("lcd " .. tostring(current_folder))
 end
-M.ext_to_runner = function(ext)
+
+local ext_to_runner = function(ext)
 	return debugger_cmd.runner_mapping[ext]
 end
 
-M.ext_to_debugger = function(ext)
+local ext_to_debugger = function(ext)
 	return debugger_cmd.debugger_mapping[ext]
 end
 
@@ -59,7 +62,7 @@ M.check_command = function(command)
 	end
 end
 
-M.term_opt = {
+local term_opt = {
 	direction = "float",
 	display_name = "Terminal",
 	cmd = nil,
@@ -80,5 +83,49 @@ M.term_opt = {
 		end,
 	},
 }
+
+M.toggle_terminal = function()
+	term_opt.dir = vim.fn.getcwd()
+	term_opt.display_name = "terminal"
+	term_opt.close_on_exit = true
+	term_opt.cmd = nil
+	local termnal = Terminal:new(term_opt)
+	termnal:toggle()
+end
+M.run_file = function()
+	local fname = vim.api.nvim_buf_get_name(0)
+	local ftype = pl_ft.detect_from_extension(fname)
+	term_opt.display_name = ftype
+	term_opt.dir = vim.fn.getcwd()
+	term_opt.close_on_exit = false
+	local runner = ext_to_runner(ftype)
+	if not runner then
+		vim.notify("no runner for current buffer", vim.log.levels.WARN)
+		return
+	end
+	term_opt.cmd = runner .. " " .. vim.api.nvim_buf_get_name(0)
+	local termnal = Terminal:new(term_opt)
+	termnal:toggle()
+end
+
+M.noui_debug = function()
+	local fname = vim.api.nvim_buf_get_name(0)
+	local ftype = pl_ft.detect_from_extension(fname)
+	term_opt.display_name = ftype .. " debug"
+	term_opt.dir = vim.fn.getcwd()
+	term_opt.close_on_exit = true
+	local debugger = ext_to_debugger(ftype)
+	if not debugger then
+		vim.notify("no debugger for current buffer", vim.log.levels.WARN)
+		return
+	end
+	term_opt.cmd = debugger .. " " .. vim.api.nvim_buf_get_name(0)
+	local termnal = Terminal:new(term_opt)
+	termnal:toggle()
+end
+
+M.buf_diag = function()
+	telescope.diagnostics({ bufnr = 0 })
+end
 
 return M
