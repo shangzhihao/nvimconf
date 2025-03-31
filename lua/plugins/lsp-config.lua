@@ -14,6 +14,7 @@ return {
 		lspconfig.ruff.setup({})
 		-- lspconfig.pylsp.setup({})
 		lspconfig.clangd.setup({})
+		lspconfig.jdtls.setup({})
 		lspconfig.rust_analyzer.setup({})
 	end,
 }

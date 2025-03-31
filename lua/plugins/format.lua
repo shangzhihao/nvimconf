@@ -6,6 +6,7 @@ return {
 				lua = { "stylua" },
 				python = { "isort", "black" },
 				rust = { "rustfmt", lsp_format = "fallback" },
+				java = { "google-java-format" },
 			},
 			vim.api.nvim_create_autocmd("BufWritePre", {
 				pattern = "*",

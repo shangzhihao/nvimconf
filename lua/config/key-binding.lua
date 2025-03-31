@@ -4,14 +4,13 @@ local telescope = require("telescope.builtin")
 local oil = require("oil")
 local key_funs = require("user.key-bind-fun")
 local ICONS = require("config.icons")
-local M = {}
 
 local show_keymap = function()
 	which_key.show({ global = false })
 end
-local setting_dir = function()
-	oil.toggle_float("~/.config/nvim")
-end
+
+local M = {}
+
 function M.setup()
 	which_key.add({
 		{ "<leader>?", show_keymap, icon = ICONS.question, desc = "Local Keymaps (which-key)" },
@@ -39,7 +38,7 @@ function M.setup()
 		{ "<leader>ff", telescope.find_files, desc = "find files" },
 		{ "<leader>fm", oil.toggle_float, desc = "file manager" },
 		{ "<leader>fh", oil.toggle_hidden, desc = "file manager" },
-		{ "<leader>fp", setting_dir, desc = "file manager" },
+		{ "<leader>fp", key_funs.setting_dir, desc = "file manager" },
 		{ "<leader>s", group = "Search" }, -- Search
 		{ "<leader>ss", telescope.live_grep, desc = "search string" },
 		{ "<leader>sf", telescope.find_files, desc = "search files" },
@@ -53,7 +52,7 @@ function M.setup()
 		{ "<leader>ld", vim.lsp.buf.definition, desc = "go to definition", icon = ICONS.motion },
 		{ "<leader>lh", vim.lsp.buf.hover, desc = "hover", icon = ICONS.hover },
 		{ "<leader>lr", vim.lsp.buf.references, desc = "show references", icon = ICONS.ref },
-		{ "<leader>lf", vim.lsp.buf.format, desc = "format code" },
+		{ "<leader>lf", key_funs.format, desc = "format code" },
 		{ "<leader>lt", telescope.treesitter, desc = "list tags", icon = ICONS.list },
 		{ "<leader>ln", vim.lsp.buf.rename, desc = "rename variable", icon = ICONS.rename },
 		{ "<leader>m", group = "Motion", icon = ICONS.motion }, -- Motion

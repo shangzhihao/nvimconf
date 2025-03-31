@@ -10,6 +10,7 @@ lua_ls for lua (installed by mason)
 clangd for cpp
 pylsp (python-lsp-server) for python
 rust-analyzer for rust
+jdtls form java
 
 ### Format and lint
 The following code formatter or linter are configured:
@@ -18,6 +19,8 @@ isort for python formatting
 black for python formatting
 pylint for python linting
 mypy for python linting
+checkstyle for java linting
+google-java-format for java formatting
 
 ### Debug
 dap-ui is installed, but only dap for python is configured now.
@@ -58,6 +61,14 @@ lua code in the lua/user are mostly about key-bindings.
 the invocation chain is utils->other->key-bind-fun->key-bindings
 
 
-
+### My note
+'n': normal mode
+'i': insert mode
+'v': visual mode
+'x': visual block mode
+'s': select mode
+'o': operator-pending mode
+'c': command-line mode
+'t': terminal mode
 
 

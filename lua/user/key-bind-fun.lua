@@ -1,9 +1,17 @@
 local telescope = require("telescope.builtin")
 local utils = require("user.utils")
 local code_runner = require("user.code-runner")
-
+local oil = require("oil")
+local conform = require("conform")
 local terminal = utils.get_term("Terminal", nil, true)
+
 M = {}
+
+M.format = function()
+	local bufnr = vim.api.nvim_get_current_buf()
+	conform.format({ bufnr = bufnr })
+end
+
 M.toggle_terminal = function()
 	terminal:toggle()
 end
@@ -13,4 +21,8 @@ M.buf_diag = function()
 end
 M.run_file = code_runner.run_file
 M.debug_file = code_runner.debug_file
+M.setting_dir = function()
+	local config_dir = vim.fn.stdpath("config")
+	oil.toggle_float(config_dir)
+end
 return M
