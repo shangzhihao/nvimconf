@@ -3,7 +3,7 @@ local dap = require("dap")
 local which_key = require("which-key")
 local telescope = require("telescope.builtin")
 local oil = require("oil")
-local ICONS = require("user.icons")
+local ICONS = require("config.icons")
 local utils = require("user.utils")
 
 local show_keymap = function()

@@ -14,6 +14,10 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.spelllang = "en_us"
 vim.opt.spell = true
+-- catppuccin flavor (light to dark) can be: latte, frappe, macchiato, mocha
+-- tokyonight flavor (light to dark) can be: day, storm, moon, night
+vim.cmd.colorscheme("catppuccin-frappe")
+-- vim.cmd.colorscheme("tokyonight-storm")
 vim.opt.listchars = {
 	tab = "│─",
 	trail = "·",
