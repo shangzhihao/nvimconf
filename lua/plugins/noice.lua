@@ -5,8 +5,12 @@ return {
             local notify = require("notify")
             notify.setup({
                 level = vim.log.levels.WARN, -- Set to WARN level, which will show WARN and ERROR messages only
+                log = {
+                    enabled = true,
+                    path = os.getenv("HOME") .. "/.nvim_notify.log",
+                },
             })
-            vim.notify = notify
+     --       vim.notify = notify
         end,
     },
     {

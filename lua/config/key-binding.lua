@@ -26,18 +26,18 @@ function M.setup()
         { "<leader>ca", "zg",                         desc = "add word to dict",    icon = ICONS.good },
         { "<leader>cs", telescope.spell_suggest,      desc = "show suggestion",     icon = ICONS.list },
         { "<leader>cr", "<cmd>spellr<cr>",            desc = "correct all" },
-        { "<leader>D",  group = "Diagnostic",         icon = ICONS.diag }, -- diagnostics Errors
+        { "<leader>d",  group = "Diagnostic",         icon = ICONS.diag }, -- diagnostics Errors
         {
-            "<leader>Dd",
+            "<leader>dd",
             function()
                 telescope.diagnostics({ bufnr = 0 })
             end,
             desc = "diagnostics in buffer",
             icon = ICONS.list,
         },
-        { "<leader>Dw", telescope.diagnostics,   desc = "diagnostics list in workspace", icon = ICONS.list },
-        { "<leader>Dp", utils.go_prev_diag,      desc = "previous diagnostic",           icon = ICONS.left },
-        { "<leader>Dn", utils.go_next_diag,      desc = "next diagnostics",              icon = ICONS.right },
+        { "<leader>dw", telescope.diagnostics,   desc = "diagnostics list in workspace", icon = ICONS.list },
+        { "<leader>dp", vim.diagnostic.goto_prev,      desc = "previous diagnostic",           icon = ICONS.left },
+        { "<leader>dn", vim.diagnostic.goto_next,      desc = "next diagnostics",         icon = ICONS.right },
         { "<leader>f",  group = "Files" }, -- Files
         { "<leader>fs", "<cmd>w<cr>",            desc = "save file",                     icon = ICONS.save },
         { "<leader>fr", telescope.oldfiles,      desc = "recent files",                  icon = ICONS.list },
@@ -89,11 +89,11 @@ function M.setup()
             desc = "toggle terminal",
             icon = ICONS.terminal,
         },
-        { "<leader>d",  group = "Debug",       icon = ICONS.debug }, -- Python
-        { "<leader>db", dap.toggle_breakpoint, desc = "toggle breakpoint", icon = ICONS.breakpoint },
-        { "<leader>dc", dap.continue,          desc = "continue",          icon = ICONS.run },
+        { "<leader>g",  group = "debuG",       icon = ICONS.debug }, -- Python
+        { "<leader>gb", dap.toggle_breakpoint, desc = "toggle breakpoint", icon = ICONS.breakpoint },
+        { "<leader>gc", dap.continue,          desc = "continue",          icon = ICONS.run },
         {
-            "<leader>dr",
+            "<leader>gr",
 
             function()
                 local term_opt = utils.term_opt
@@ -116,7 +116,7 @@ function M.setup()
             icon = ICONS.run,
         },
         {
-            "<leader>dd",
+            "<leader>gd",
             function()
                 local term_opt = utils.term_opt
                 local fname = vim.api.nvim_buf_get_name(0)
