@@ -77,6 +77,9 @@ function M.setup()
             "<leader>wt",
             function()
                 local term_opt = utils.term_opt
+                local fname = vim.api.nvim_buf_get_name(0)
+                local dir = utils.get_dir(fname)
+                term_opt.dir = dir
                 term_opt.display_name = "terminal"
                 term_opt.close_on_exit = true
                 term_opt.cmd = nil
@@ -96,13 +99,15 @@ function M.setup()
                 local term_opt = utils.term_opt
                 local fname = vim.api.nvim_buf_get_name(0)
                 local ftype = utils.get_ext_name(fname)
+                local dir = utils.get_dir(fname)
+                term_opt.display_name = ftype
+                term_opt.dir = dir
+                term_opt.close_on_exit = false
                 local runner = utils.ext_to_runner(ftype)
                 if not runner then
                     vim.notify("no runner for current buffer", vim.log.levels.WARN)
                     return
                 end
-                term_opt.display_name = ftype
-                term_opt.close_on_exit = false
                 term_opt.cmd = runner .. " " .. vim.api.nvim_buf_get_name(0)
                 local termnal = Terminal:new(term_opt)
                 termnal:toggle()
@@ -116,13 +121,15 @@ function M.setup()
                 local term_opt = utils.term_opt
                 local fname = vim.api.nvim_buf_get_name(0)
                 local ftype = utils.get_ext_name(fname)
+                local dir = utils.get_dir(fname)
+                term_opt.display_name = ftype .. " debug"
+                term_opt.dir = dir
+                term_opt.close_on_exit = true
                 local debugger = utils.ext_to_debugger(ftype)
                 if not debugger then
                     vim.notify("no debugger for current buffer", vim.log.levels.WARN)
                     return
                 end
-                term_opt.display_name = ftype .. " debug"
-                term_opt.close_on_exit = true
                 term_opt.cmd = debugger .. " " .. vim.api.nvim_buf_get_name(0)
                 local termnal = Terminal:new(term_opt)
                 termnal:toggle()

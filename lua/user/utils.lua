@@ -20,7 +20,7 @@ M.get_ext_name = function(full_path)
     return lastDot:sub(2)
 end
 
-M.get_path = function(full_path)
+M.get_dir = function(full_path)
     return full_path:match("(.*/)") or full_path:match("(.+\\)")
 end
 
