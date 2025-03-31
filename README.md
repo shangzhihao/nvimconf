@@ -7,11 +7,9 @@
 ### LSP
 The following language servers are configured:
 lua_ls for lua (installed by mason)
-clangd for cpp
 ruff for python
 pylsp (python-lsp-server) for python
 rust-analyzer for rust
-jdtls form java
 
 ### Format and lint
 The following code formatter or linter are configured:
@@ -22,7 +20,6 @@ ruff for python linting
 pylint for python linting
 mypy for python linting
 checkstyle for java linting
-google-java-format for java formatting
 
 ### Debug
 dap-ui is installed, but only dap for python is configured now.

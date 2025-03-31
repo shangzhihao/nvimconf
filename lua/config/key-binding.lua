@@ -4,7 +4,8 @@ local telescope = require("telescope.builtin")
 local oil = require("oil")
 local key_funs = require("user.key-bind-fun")
 local ICONS = require("config.icons")
-
+local ufo = require("ufo")
+local neogen = require("neogen")
 local M = {}
 -- TODO: add a function to generate the keybindings
 vim.keymap.set("n", "<leader>ln", function()
@@ -13,8 +14,6 @@ end, { expr = true })
 
 function M.setup()
 	which_key.add({
-		{ "J", key_funs.scroll_down, icon = ICONS.buf },
-		{ "K", key_funs.scroll_up, icon = ICONS.buf },
 		{ "<leader>b", group = "Buffers", icon = ICONS.buf }, -- Buffers
 		{ "<leader>bl", "<cmd>Telescope buffers<cr>", desc = "list buffers", icon = ICONS.list },
 		{ "<leader>bc", "<cmd>bd<cr>", desc = "close buffer", icon = ICONS.fclose },
@@ -50,11 +49,14 @@ function M.setup()
 		{ "<leader>lt", telescope.treesitter, desc = "list tags", icon = ICONS.list },
 		-- { "<leader>ln", vim.lsp.buf.rename, desc = "rename variable", icon = ICONS.rename },
 		{ "<leader>m", group = "Motion", icon = ICONS.motion }, -- Motion
-		{ "<leader>mm", "<Plug>(leap)", desc = "move in this window", icon = ICONS.motion },
-		{ "<leader>mb", "<Plug>(leap-backward)", desc = "move backward", icon = ICONS.left },
-		{ "<leader>mf", "<Plug>(leap-forward)", desc = "move forward", icon = ICONS.right },
-		{ "<leader>mp", vim.diagnostic.goto_prev, desc = "previous diagnostic", icon = ICONS.left },
-		{ "<leader>mn", vim.diagnostic.goto_next, desc = "next diagnostic", icon = ICONS.right },
+		{ "<leader>mm", "<Plug>(leap)", desc = "move to word", icon = ICONS.motion },
+		{ "<leader>mt", key_funs.scroll_top, desc = "cursor top", icon = ICONS.top },
+		{ "<leader>mc", key_funs.scroll_center, desc = "cursor center", icon = ICONS.center },
+		{ "<leader>mb", key_funs.scroll_bottom, desc = "cursor bottom", icon = ICONS.bottom },
+		{ "<leader>mk", key_funs.scroll_up, desc = "scroll up", icon = ICONS.up },
+		{ "<leader>mj", key_funs.scroll_down, desc = "scroll down", icon = ICONS.down },
+		{ "<leader>mh", "^", desc = "first letter", icon = ICONS.left },
+		{ "<leader>ml", "$", desc = "last letter", icon = ICONS.right },
 		{ "<leader>s", group = "Spells check", icon = ICONS.check }, -- Check spells
 		{ "<leader>sn", "]s", desc = "next misspelled", icon = ICONS.right },
 		{ "<leader>sp", "[s", desc = "previous misspelled", icon = ICONS.left },
@@ -84,14 +86,11 @@ function M.setup()
 		{ "<leader>x", group = "Misc.", icon = ICONS.debug }, -- Misc
 		{ "<leader>xh", "<cmd>set hlsearch!<CR>", desc = "toggle highlight", icon = ICONS.misc },
 		{ "<leader>xw", key_funs.toggle_wrap, desc = "toggle wrap", icon = ICONS.misc },
-		{ "<leader>xd", require("neogen").generate, desc = "generate doc", icon = ICONS.misc },
+		{ "<leader>xd", neogen.generate, desc = "generate doc", icon = ICONS.misc },
 		{ "<leader>z", group = "Fold", icon = ICONS.fold }, -- Fold
-		{ "<leader>zo", require("ufo").openAllFolds, desc = "open all folds", icon = ICONS.fold },
-		{ "<leader>zc", require("ufo").closeAllFolds, desc = "close all folds", icon = ICONS.fold },
-		{ "<leader>zh", require("ufo").peekFoldedLinesUnderCursor, desc = "peek folded lines", icon = ICONS.fold },
+		{ "<leader>zr", ufo.openAllFolds, desc = "open all folds", icon = ICONS.fold },
+		{ "<leader>zm", ufo.closeAllFolds, desc = "close all folds", icon = ICONS.fold },
+		{ "<leader>zh", ufo.peekFoldedLinesUnderCursor, desc = "peek folded lines", icon = ICONS.fold },
 	})
 end
-
--- vim.keymap.set("n", "zR", require("ufo").openAllFolds)
--- vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
 return M

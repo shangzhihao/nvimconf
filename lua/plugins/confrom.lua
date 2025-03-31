@@ -7,7 +7,6 @@ return {
 				python = { "ruff_format", "ruff_organize_imports", "ruff_fix" },
 				-- python = { "isort", "black" },
 				rust = { "rustfmt", lsp_format = "fallback" },
-				java = { "google-java-format" },
 			},
 			vim.api.nvim_create_autocmd("BufWritePre", {
 				pattern = "*",

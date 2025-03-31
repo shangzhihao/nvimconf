@@ -7,7 +7,6 @@ return {
 			-- python = { "ruff", "mypy" },
 			-- python = { "pylint", "mypy" },
 			rust = { "clippy" },
-			java = { "checkstyle" },
 		}
 		vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 			callback = function()
