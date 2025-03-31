@@ -1,36 +1,51 @@
 local M = {}
 
-local Term = require("toggleterm.terminal").Terminal
+M.Termimal = require("toggleterm.terminal").Terminal
+M.ext_to_runner = function(ext)
+    local cmd_mapping = {
+        py = "python",
+        lua = "lua",
+    }
+    return cmd_mapping[ext]
+end
+M.ext_to_debugger = function(ext)
+    local debugger_mapping = {
+        py = "python -m pbd",
+    }
+    return debugger_mapping[ext]
+end
+M.get_ext_name = function(fullPath)
+    -- Find the last dot in the string
+    local lastDot = fullPath:match("^.-(%.[^%.\\/]*)$")
+    -- If there's no dot, return an empty string (no extension)
+    if not lastDot then
+        return ""
+    end
+    return lastDot:sub(2)
+end
+
 M.go_next_diag = function()
     -- Get all diagnostics in the current buffer
     local diagnostics = vim.diagnostic.get(0)
 
-    -- Check if there are any diagnostics
     if #diagnostics == 0 then
-        vim.notify("No diagnostics found in current buffer", vim.log.levels.WARN)
+        vim.notify("No diagnostics found in current buffer", vim.log.levels.INFO)
         return
     end
-
-    -- Get current cursor position
     local current_line = vim.api.nvim_win_get_cursor(0)[1]
-
-    -- Initialize variables to track the next diagnostic
     local next_line = nil
     local smallest_diff = math.huge
 
-    -- Find the next diagnostic after current line
     for _, diagnostic in ipairs(diagnostics) do
         local diag_line = diagnostic.lnum + 1 -- Convert to 1-based line number
         local diff = diag_line - current_line
 
-        -- Look for the closest diagnostic that's after current line
         if diff > 0 and diff < smallest_diff then
             smallest_diff = diff
             next_line = diag_line
         end
     end
 
-    -- If we found a next diagnostic, move to it
     if next_line then
         vim.api.nvim_win_set_cursor(0, { next_line, 0 })
     else
@@ -43,17 +58,12 @@ end
 M.go_prev_diag = function()
     -- Get all diagnostics in the current buffer
     local diagnostics = vim.diagnostic.get(0)
-
-    -- Check if there are any diagnostics
     if #diagnostics == 0 then
-        vim.notify("No diagnostics found in current buffer", vim.log.levels.WARN)
+        vim.notify("No diagnostics found in current buffer", vim.log.levels.INFO)
         return
     end
 
-    -- Get current cursor position
     local current_line = vim.api.nvim_win_get_cursor(0)[1]
-
-    -- Initialize variables to track the previous diagnostic
     local prev_line = nil
     local smallest_diff = math.huge
 
@@ -61,15 +71,12 @@ M.go_prev_diag = function()
     for _, diagnostic in ipairs(diagnostics) do
         local diag_line = diagnostic.lnum + 1 -- Convert to 1-based line number
         local diff = current_line - diag_line
-
-        -- Look for the closest diagnostic that's before current line
         if diff > 0 and diff < smallest_diff then
             smallest_diff = diff
             prev_line = diag_line
         end
     end
 
-    -- If we found a previous diagnostic, move to it
     if prev_line then
         vim.api.nvim_win_set_cursor(0, { prev_line, 0 })
     else
@@ -88,7 +95,6 @@ M.check_command = function(command)
 
     local clangd_path = handle:read("*a") -- Read the entire output as a string
     handle:close()                     -- Close the pipe
-    -- Check if the command was found
     if clangd_path ~= "" then
         return true
     else
@@ -118,9 +124,6 @@ M.term_opt = {
     },
 }
 
-local terminal = Term:new(M.term_opt)
-
-M.terminal = terminal
-M.Term = Term
+M.term_win = M.Termimal:new(M.term_opt)
 
 return M
