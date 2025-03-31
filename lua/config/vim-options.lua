@@ -28,4 +28,5 @@ vim.api.nvim_set_keymap("n", "U", "<C-r>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "J", "<C-d>", { noremap = true, silent = true })
 -- K to scroll up
 vim.api.nvim_set_keymap("n", "K", "<C-u>", { noremap = true, silent = true })
+vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], {})
 

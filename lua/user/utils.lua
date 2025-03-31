@@ -1,26 +1,27 @@
 local M = {}
 
+local debugger_cmd = require("config.debugger-cmd")
+
 M.ext_to_runner = function(ext)
-    local cmd_mapping = {
-        py = "python",
-        lua = "lua",
-    }
-    return cmd_mapping[ext]
+    return debugger_cmd.runner_mapping[ext]
 end
+
 M.ext_to_debugger = function(ext)
-    local debugger_mapping = {
-        py = "python -m pdb",
-    }
-    return debugger_mapping[ext]
+    return debugger_cmd.debugger_mapping[ext]
 end
-M.get_ext_name = function(fullPath)
+
+M.get_ext_name = function(full_path)
     -- Find the last dot in the string
-    local lastDot = fullPath:match("^.-(%.[^%.\\/]*)$")
+    local lastDot = full_path:match("^.-(%.[^%.\\/]*)$")
     -- If there's no dot, return an empty string (no extension)
     if not lastDot then
         return ""
     end
     return lastDot:sub(2)
+end
+
+M.get_path = function(full_path)
+    return full_path:match("(.*/)") or full_path:match("(.+\\)")
 end
 
 M.go_next_diag = function()
@@ -122,7 +123,5 @@ M.term_opt = {
         end,
     },
 }
-
-
 
 return M
