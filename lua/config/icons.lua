@@ -25,5 +25,5 @@ return {
 	rename = { icon = "󰑕", color = "green" },
 	ref = { icon = "", color = "green" },
 	breakpoint = { icon = "", color = "red" },
+	misc = { icon = "", color = "cyan" },
 }
-

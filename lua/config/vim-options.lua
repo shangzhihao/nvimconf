@@ -24,13 +24,16 @@ vim.opt.listchars = {
 	eol = "↵",
 }
 vim.opt.list = true
-
+-- Remove the 'q:' keymap that opens the command window
+vim.api.nvim_set_keymap("n", "q:", ":", { noremap = true })
 -- 0 move to the 1st letter of the line
 vim.api.nvim_set_keymap("n", "0", "^", { noremap = true, silent = true })
--- U for redo
-vim.api.nvim_set_keymap("n", "U", "<C-r>", { noremap = true, silent = true })
+-- r for redo
+vim.api.nvim_set_keymap("n", "r", "<C-r>", { noremap = true, silent = true })
 -- J to scroll down
-vim.api.nvim_set_keymap("n", "J", "<C-d>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "J", "5j", { noremap = true, silent = true })
 -- K to scroll up
-vim.api.nvim_set_keymap("n", "K", "<C-u>", { noremap = true, silent = true })
-vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], {})
+vim.api.nvim_set_keymap("n", "K", "5k", { noremap = true, silent = true })
+-- esc to return normal mode in terminal
+vim.api.nvim_set_keymap("t", "<esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
+-- vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], {})

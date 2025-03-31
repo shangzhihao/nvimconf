@@ -11,7 +11,7 @@ return {
 			win = {
 				padding = { 1, 1, 1, 1 },
 				border = "single",
-				height = 10,
+				height = 8,
 				wo = { winblend = 20 },
 			},
 		})
