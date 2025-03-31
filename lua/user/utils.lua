@@ -1,6 +1,5 @@
 local M = {}
 
-M.Termimal = require("toggleterm.terminal").Terminal
 M.ext_to_runner = function(ext)
     local cmd_mapping = {
         py = "python",
@@ -10,7 +9,7 @@ M.ext_to_runner = function(ext)
 end
 M.ext_to_debugger = function(ext)
     local debugger_mapping = {
-        py = "python -m pbd",
+        py = "python -m pdb",
     }
     return debugger_mapping[ext]
 end
@@ -124,6 +123,6 @@ M.term_opt = {
     },
 }
 
-M.term_win = M.Termimal:new(M.term_opt)
+
 
 return M

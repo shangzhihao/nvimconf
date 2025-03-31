@@ -30,8 +30,10 @@ based on file type in the future.
 It will the current buffer based on its file type.
 
 ### Dependency by plugins
-tar, curl and a c compiler, are required by nvim-treesitter
+tar, curl and a c compiler are required by nvim-treesitter
 ripgrep, fd, and fzf are required by telescope
+wget is not required by any plugins, 
+but checkhealth says it shoud be installed, no harm anyaway.
 
 ### Python packages
 pip install python-lsp-server isort black pylint mypy
@@ -43,8 +45,9 @@ curl: winget install -e --id cURL.cURL
 clang & lldb: winget install -e --id LLVM.LLVM
 fd: winget install -e --id sharkdp.fd
 ripgrep: winget install -e --id BurntSushi.ripgrep.MSVC
+wget: winget install -e --id JernejSimoncic.Wget
 
-ALL: winget install GnuWin32.Tar cURL.cURL sharkdp.fd BurntSushi.ripgrep.MSVC LLVM.LLVM
+ALL: winget install GnuWin32.Tar cURL.cURL sharkdp.fd BurntSushi.ripgrep.MSVC LLVM.LLVM JernejSimoncic.Wget
 
 The folder that mason installs language server is ~/AppData/Local/nvim-data/mason/bin.
 Add the folder to PATH if NeoVim cannot find installed language servers.
