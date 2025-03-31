@@ -3,7 +3,9 @@ return {
 		"rcarriga/nvim-notify",
 		config = function()
 			local notify = require("notify")
-			notify.setup({})
+			notify.setup({
+				timeout = 500,
+			})
 		end,
 	},
 	{
@@ -12,6 +14,7 @@ return {
 		opts = {},
 		dependencies = {
 			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
 		},
 		config = function()
 			local noice = require("noice")

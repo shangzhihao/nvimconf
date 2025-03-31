@@ -11,7 +11,7 @@ local run_py = function()
 end
 local debug_py = function()
 	local fname = vim.api.nvim_buf_get_name(0)
-	local cmd = "python -m pdb " .. fname
+	local cmd = "python -m pudb " .. fname
 	local terminal = utils.get_term("pdb", cmd, false)
 	terminal:toggle()
 end

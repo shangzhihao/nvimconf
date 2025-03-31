@@ -54,13 +54,14 @@ function M.setup()
 		{ "<leader>ss", telescope.spell_suggest, desc = "show suggestion", icon = ICONS.list },
 		{ "<leader>sr", "<cmd>spellr<cr>", desc = "correct all" },
 		{ "<leader>t", group = "Telescope" }, -- Search
+		{ "<leader>tt", telescope.builtin, desc = "telescope functions" },
 		{ "<leader>ts", telescope.live_grep, desc = "live grep" },
 		{ "<leader>tf", telescope.find_files, desc = "find files" },
 		{ "<leader>tl", telescope.current_buffer_fuzzy_find, desc = "search lines" },
-		{ "<leader>tm", "<cmd>Telescope notify<cr>", desc = "message history" },
+		{ "<leader>tm", "<cmd>Telescope notify<cr>", desc = "messages" },
 		{ "<leader>tp", "<cmd>Telescope projects<cr>", desc = "projects" },
 		{ "<leader>tb", telescope.buffers, desc = "opened buffers" },
-		{ "<leader>tt", telescope.treesitter, desc = "treesitter tags" },
+		{ "<leader>tn", telescope.treesitter, desc = "treesitter names" },
 		{ "<leader>tr", telescope.registers, desc = "list registers" },
 		{ "<leader>w", group = "Windows" }, -- Windows
 		{ "<leader>wc", "<c-w>c", desc = "close window", icon = ICONS.cross },
@@ -73,6 +74,7 @@ function M.setup()
 		{ "<leader>wt", key_funs.toggle_terminal, desc = "toggle terminal", icon = ICONS.terminal },
 		{ "<leader>x", group = "Misc.", icon = ICONS.debug }, -- Misc
 		{ "<leader>xh", "<cmd>set hlsearch!<CR>", desc = "toggle highlight", icon = ICONS.misc },
+		{ "<leader>xw", key_funs.toggle_wrap, desc = "toggle wrap", icon = ICONS.misc },
 	})
 end
 
