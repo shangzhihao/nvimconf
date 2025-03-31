@@ -1,9 +1,9 @@
 local M = {}
-M.runner_mapping= {
-	py = "python",
+M.runner_mapping = {
+	python = "python",
 	lua = "lua",
 }
 M.debugger_mapping = {
-	py = "python -m pdb",
+	python = "python -m pdb",
 }
 return M

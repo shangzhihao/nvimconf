@@ -5,6 +5,7 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.mouse = ""
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 vim.opt.errorbells = false
@@ -14,9 +15,9 @@ vim.opt.smartcase = true
 vim.opt.spelllang = "en_us"
 vim.opt.spell = true
 vim.opt.listchars = {
-    tab = "│─",
-    trail = "·",
-    eol = "↵",
+	tab = "│─",
+	trail = "·",
+	eol = "↵",
 }
 vim.opt.list = true
 
@@ -28,5 +29,4 @@ vim.api.nvim_set_keymap("n", "U", "<C-r>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "J", "<C-d>", { noremap = true, silent = true })
 -- K to scroll up
 vim.api.nvim_set_keymap("n", "K", "<C-u>", { noremap = true, silent = true })
-vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], {})
-
+vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], {})

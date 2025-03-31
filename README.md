@@ -9,6 +9,7 @@ The following language servers are configured:
 lua_ls for lua (installed by mason)
 clangd for cpp
 pylsp (python-lsp-server) for python
+rust-analyzer for rust
 
 ### Format and lint
 The following code formatter or linter are configured:
