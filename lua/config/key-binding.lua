@@ -53,7 +53,6 @@ function M.setup()
 		{ "<leader>ld", vim.lsp.buf.definition, desc = "go to definition", icon = ICONS.motion },
 		{ "<leader>lh", vim.lsp.buf.hover, desc = "hover", icon = ICONS.hover },
 		{ "<leader>lr", vim.lsp.buf.references, desc = "show references", icon = ICONS.ref },
-		{ "<leader>lf", key_funs.format, desc = "format code" },
 		{ "<leader>lt", telescope.treesitter, desc = "list tags", icon = ICONS.list },
 		-- Motion
 		{ "<leader>m", group = "Motion", icon = ICONS.motion },
@@ -61,8 +60,10 @@ function M.setup()
 		{ "<leader>mt", key_funs.scroll_top, desc = "cursor top", icon = ICONS.top },
 		{ "<leader>mc", key_funs.scroll_center, desc = "cursor center", icon = ICONS.center },
 		{ "<leader>mb", key_funs.scroll_bottom, desc = "cursor bottom", icon = ICONS.bottom },
-		{ "<leader>mh", "^", desc = "first letter", icon = ICONS.left },
-		{ "<leader>ml", "$", desc = "last letter", icon = ICONS.right },
+		{ "<leader>mh", "<Plug>(easymotion-linebackward)", desc = "line backward", icon = ICONS.left },
+		{ "<leader>ml", "<Plug>(easymotion-lineforward)", desc = "line forward", icon = ICONS.right },
+		{ "<leader>mj", "<Plug>(easymotion-j)", desc = "forward", icon = ICONS.down },
+		{ "<leader>mk", "<Plug>(easymotion-k)", desc = "backward", icon = ICONS.up },
 		-- Search
 		{ "<leader>s", group = "Search" },
 		{ "<leader>se", telescope.registers, desc = "registers" },
@@ -85,7 +86,6 @@ function M.setup()
 		{ "<leader>wk", "<c-w>k", desc = "to upper window", icon = ICONS.up },
 		{ "<leader>wh", "<c-w>h", desc = "to left window", icon = ICONS.left },
 		{ "<leader>wl", "<c-w>l", desc = "to right window", icon = ICONS.right },
-		{ "<leader>wt", key_funs.toggle_terminal, desc = "toggle terminal", icon = ICONS.terminal },
 		-- Misc
 		{ "<leader>x", group = "Misc.", icon = ICONS.debug },
 		{ "<leader>xh", "<cmd>set hlsearch!<CR>", desc = "toggle highlight", icon = ICONS.misc },

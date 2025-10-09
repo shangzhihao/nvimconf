@@ -1,21 +1,11 @@
 local telescope = require("telescope.builtin")
 local utils = require("user.utils")
 local oil = require("oil")
-local conform = require("conform")
-local terminal = utils.get_term("Terminal", nil, true)
 local neoscroll = require("neoscroll")
 M = {}
 
 M.toggle_wrap = function()
 	vim.wo.wrap = not vim.wo.wrap
-end
-M.format = function()
-	local bufnr = vim.api.nvim_get_current_buf()
-	conform.format({ bufnr = bufnr })
-end
-
-M.toggle_terminal = function()
-	terminal:toggle()
 end
 
 M.buf_diag = function()

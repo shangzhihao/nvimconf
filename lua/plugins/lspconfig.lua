@@ -1,17 +1,18 @@
 return {
 	"neovim/nvim-lspconfig",
 	config = function()
-		local lspconfig = require("lspconfig")
-		lspconfig.lua_ls.setup({
-			settings = {
-				Lua = {
-					diagnostics = {
-						globals = { "vim" },
-					},
-				},
-			},
-		})
-		lspconfig.pyright.setup({})
-		-- lspconfig.pylsp.setup({})
-	end,
+        vim.lsp.config("lua_ls", {
+            settings = {
+                Lua = {
+                    diagnostics = { globals = { "vim" } },
+                },
+            },
+        })
+
+        vim.lsp.config("pyright", {})
+
+        -- Enable them for their respective filetypes
+        vim.lsp.enable("lua_ls")
+        vim.lsp.enable("pyright")
+    end,
 }

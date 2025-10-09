@@ -27,3 +27,4 @@ vim.opt.listchars = {
 }
 vim.opt.list = true
 vim.opt.signcolumn = "yes"
+vim.g.EasyMotion_smartcase = 1

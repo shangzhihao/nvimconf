@@ -1,7 +1,5 @@
 local Path = require("plenary.path")
-local togg_term = require("toggleterm.terminal")
-local Terminal = togg_term.Terminal
-local term_opt = vim.g.my_float_term_opt
+
 
 local M = {}
 
@@ -67,12 +65,4 @@ local function deepcopy(orig)
 end
 M.deepcopy = deepcopy
 
-M.get_term = function(title, cmd, is_close)
-	local opt = deepcopy(term_opt)
-	opt.dir = vim.fn.getcwd()
-	opt.display_name = title
-	opt.close_on_exit = is_close
-	opt.cmd = cmd
-	return Terminal:new(opt)
-end
 return M
