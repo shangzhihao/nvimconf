@@ -2,7 +2,14 @@
 
 Opinionated, plugin-driven Neovim setup optimised for daily development with fast navigation, rich UI, and batteries-included language tooling.
 
-## Requirements
+## Why This Setup
+
+- Tightly curated plugin stack tuned for fast startup and minimal manual tweaking.
+- First-class Telescope workflow with project-aware fuzzy finding via smart-open.
+- Visual polish (Catppuccin, Noice, Lualine) without sacrificing responsiveness.
+- Quality-of-life automation for directory changes, spell checking, and Markdown authoring.
+
+## Prerequisites
 
 - Neovim ≥ 0.10.0 (uses the native `vim.lsp.config`/`vim.lsp.enable` APIs)
 - `git`, `curl`
@@ -10,10 +17,10 @@ Opinionated, plugin-driven Neovim setup optimised for daily development with fas
 - SQLite 3 (bundled with macOS; required by `smart-open.nvim` via `sqlite.lua`)
 - A Nerd Font for icons used by lualine, Oil, Telescope, and Alpha
 
-## Installation
+## Quickstart
 
 1. Back up any existing Neovim configuration (`~/.config/nvim`).
-2. Clone this repository (the examples assume dotfiles live in `~/dotfiles`):
+2. Clone this repository (examples assume dotfiles live in `~/dotfiles`):
 
    ```bash
    git clone <repo-url> ~/dotfiles/nvim
@@ -28,45 +35,15 @@ Opinionated, plugin-driven Neovim setup optimised for daily development with fas
 4. Launch `nvim` once to let [lazy.nvim](https://github.com/folke/lazy.nvim) bootstrap and install plugins.
 5. Inside Neovim run `:Lazy sync` to ensure everything is pulled at the locked versions defined in `lazy-lock.json`.
 
-> **Tip:** Install external LSP servers (e.g. `pyright`) with your preferred package manager. This configuration relies on Neovim’s built-in client rather than Mason.
+> Install external LSP servers (e.g. `pyright`) with your preferred package manager. This configuration relies on Neovim’s built-in client rather than Mason.
 
-## Highlights
+## Daily Workflow Highlights
 
-### UI & Ergonomics
-
-- [catppuccin](https://github.com/catppuccin/nvim) (Frappe) is the default colorscheme; [tokyonight](https://github.com/folke/tokyonight.nvim) is pre-installed as an alternative (`lua/config/vim-options.lua`).
-- [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) with a live macro recorder indicator.
-- [noice.nvim](https://github.com/folke/noice.nvim) combined with [nvim-notify](https://github.com/rcarriga/nvim-notify) provides a modern command line, message routing, and ephemeral notifications.
-- [alpha-nvim](https://github.com/goolord/alpha-nvim) start screen with a random tip of the day and most-recently-used file list.
-
-### Navigation & Search
-
-- [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) with `ui-select`, `notify`, and [`smart-open`](https://github.com/danielfalk/smart-open.nvim) for project-aware fuzzy finding.
-- [oil.nvim](https://github.com/stevearc/oil.nvim) as the primary file explorer, exposed through floating windows with metadata columns.
-- [vim-easymotion](https://github.com/easymotion/vim-easymotion) for quick in-buffer jumps.
-- [neoscroll.nvim](https://github.com/karb94/neoscroll.nvim) provides smooth scrolling helpers.
-
-### Editing Workflow
-
-- [which-key.nvim](https://github.com/folke/which-key.nvim) drives the leader-key menu with iconography (`lua/config/key-binding.lua`).
-- Spell checking is enabled by default (`en_us`) with quick navigation helpers.
-- [inc-rename.nvim](https://github.com/smjonas/inc-rename.nvim) powers inline LSP renames.
-- [nvim-autopairs](https://github.com/windwp/nvim-autopairs) for structural editing.
-- [render-markdown.nvim](https://github.com/MeanderingProgrammer/render-markdown.nvim) previews Markdown structure directly in the buffer.
-- [vim-illuminate](https://github.com/RRethy/vim-illuminate) and [rainbow-delimiters](https://github.com/HiPhish/rainbow-delimiters.nvim) improve code comprehension.
-
-### Language Tooling
-
-- Native LSP client configured for:
-  - `lua_ls` (with diagnostics tailored for Neovim runtime)
-  - `pyright` for Python
-- [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) with auto-install, highlighting, and indentation.
-- [nvim-treesitter-context](https://github.com/nvim-treesitter/nvim-treesitter-context) keeps the current scope in view.
-
-### Quality-of-life Automations
-
-- `DirChanged` autocmd announces the new working directory (shortened when inside `/Users/shang/`), implemented in `lua/user/autocmd.lua`.
-- Utility helpers live in `lua/user/utils.lua` (e.g. directory detection, command checks).
+- **UI & Ergonomics**: Catppuccin (Frappe) default theme, alternative Tokyonight preset (`lua/config/vim-options.lua`), modern command line via Noice, notifications through nvim-notify, and an Alpha start screen with MRU and tips.
+- **Navigation & Search**: Telescope with `ui-select`, `notify`, and `smart-open`, Oil.nvim floating file explorer, Easymotion for in-buffer jumps, and Neoscroll for smooth page navigation.
+- **Editing Experience**: which-key leader hints, inline LSP renames with inc-rename, structural editing via nvim-autopairs, Markdown previews rendered in-buffer, plus illuminate and rainbow-delimiters for rapid comprehension.
+- **Language Tooling**: Native LSP client configured for `lua_ls` and `pyright`, Treesitter auto-install/highlighting/indentation, and Treesitter-context to keep the active scope visible.
+- **Automations**: `DirChanged` autocmd announces new working directories (shortened inside `/Users/shang/`), with supporting helpers under `lua/user/utils.lua`.
 
 ## Keymap Cheatsheet
 
@@ -95,21 +72,21 @@ Leader key is `<Space>` and local leader is `,`. The table below lists the mappi
 | `<leader>mm` | Normal | EasyMotion two-character jump |
 | `<leader>k` / `<leader>j` | Normal | Smooth scroll up / down via Neoscroll |
 
-> **Note:** `<leader>sr` expects a `:GrugFar` command (for example from `grug-far.nvim`) and `<leader>so` expects `:TodoTelescope`. Add the corresponding plugins if you rely on those mappings.
-
-## Plugin Management
-
-- Run `:Lazy` to inspect plugin status, updates, or logs.
-- `lazy-lock.json` pins plugin versions for reproducible setups; update via `:Lazy sync` and commit the lockfile.
-- Add or remove plugins under `lua/plugins/` (each plugin lives in its own module).
+> `<leader>sr` expects a `:GrugFar` command (for example from `grug-far.nvim`) and `<leader>so` expects `:TodoTelescope`. Add the corresponding plugins if you rely on those mappings.
 
 ## Customisation Guide
 
 - Core options (line numbers, colorscheme, spell check, indentation) live in `lua/config/vim-options.lua`.
 - Adjust keybindings in `lua/config/key-binding.lua` and helper functions in `lua/user/key-bind-fun.lua`.
-- Tweak plugin behaviour by editing the corresponding `lua/plugins/*.lua` module.
+- Plugin behaviour is defined in `lua/plugins/*.lua`; each module owns a single plugin for easy toggling.
 - Startup screen tweaks (MRU list, banner, tips) live in `lua/config/startui-mru.lua` and `lua/config/tips.lua`.
-- Icons used by which-key are centralised in `lua/config/icons.lua`.
+- Icon definitions for which-key live in `lua/config/icons.lua`.
+
+## Maintenance
+
+- Run `:Lazy` to inspect plugin status, updates, or logs.
+- `lazy-lock.json` pins plugin versions for reproducible setups; update via `:Lazy sync` and commit the lockfile.
+- After adding new external tooling (LSP servers, formatters) rerun `:checkhealth` to confirm availability.
 
 ## Troubleshooting
 

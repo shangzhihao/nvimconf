@@ -1,18 +1,37 @@
+-- lua/plugins/lsp.lua
 return {
-	"neovim/nvim-lspconfig",
-	config = function()
-        vim.lsp.config("lua_ls", {
-            settings = {
-                Lua = {
-                    diagnostics = { globals = { "vim" } },
-                },
-            },
-        })
+  "neovim/nvim-lspconfig",
+  dependencies = {
+    "hrsh7th/cmp-nvim-lsp",
+  },
+  config = function()
+    -- merge cmp capabilities with LSP defaults
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-        vim.lsp.config("pyright", {})
+    -- configure servers (new API)
+    vim.lsp.config("pyright", {
+      capabilities = capabilities,
+      -- settings = { python = { analysis = { typeCheckingMode = "basic" } } },
+    })
 
-        -- Enable them for their respective filetypes
-        vim.lsp.enable("lua_ls")
-        vim.lsp.enable("pyright")
-    end,
+    vim.lsp.config("lua_ls", {
+      capabilities = capabilities,
+      settings = {
+        Lua = {
+          diagnostics = { globals = { "vim" } },
+          workspace = { checkThirdParty = false },
+          telemetry = { enable = false },
+        },
+      },
+    })
+
+    -- (optional) Ruff LSP if you want linting/quickfixes
+    -- vim.lsp.config("ruff", { capabilities = capabilities })
+
+    -- enable them globally
+    vim.lsp.enable("pyright")
+    vim.lsp.enable("lua_ls")
+    -- vim.lsp.enable("ruff")
+  end,
 }
+

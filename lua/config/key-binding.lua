@@ -17,7 +17,6 @@ function M.setup()
 		{ "<leader>k", key_funs.scroll_up, hidden = true },
 		{ "<leader>j", key_funs.scroll_down, hidden = true },
 		{ "<leader><leader>", "<Plug>(easymotion-bd-jk)", hidden = true },
-		{ "w", "<Plug>(easymotion-bd-fl)", hidden = true },
 		-- Buffers
 		{ "<leader>b", group = "Buffer", icon = ICONS.buf },
 		{ "<leader>bl", "<cmd>Telescope buffers<cr>", desc = "list buffers", icon = ICONS.list },
@@ -41,9 +40,10 @@ function M.setup()
 		{ "<leader>en", vim.diagnostic.goto_next, desc = "next error", icon = ICONS.right },
 		-- Files
 		{ "<leader>f", group = "File" },
-		{ "<leader>fw", "<cmd>w<cr>", desc = "save file", icon = ICONS.save },
+		{ "<leader>fw", "<cmd>w<cr>", desc = "save", icon = ICONS.save },
+		{ "<leader>fq", "<cmd>q<cr>", desc = "quit" },
+		{ "<leader>fx", "<cmd>x<cr>", desc = "save and quit" },
 		{ "<leader>ff", "<cmd>Telescope smart_open<cr>", desc = "find files", icon = ICONS.list },
-		{ "<leader>fq", "<cmd>q<cr>", desc = "save and quit" },
 		{ "<leader>fd", "<cmd>q!<cr>", desc = "discard and quit" },
 		{ "<leader>fm", oil.toggle_float, desc = "oil file manager" },
 		{ "<leader>fh", oil.toggle_hidden, desc = "oil toggle hidden" },
